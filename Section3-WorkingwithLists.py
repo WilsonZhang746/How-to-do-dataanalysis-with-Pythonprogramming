@@ -139,3 +139,36 @@ print(cars)
 #Finding the Length of a List
 cars = ['bmw', 'audi', 'toyota', 'subaru']
 len(cars)
+
+
+
+
+##Lecture 4. Looping Through a List
+#Looping Through an Entire List
+magicians = ['alice', 'david', 'carolina']
+for magician in magicians:
+    print(magician)        #need tab indent here
+    
+
+#Doing More Work Within a for Loop
+magicians = ['alice', 'david', 'carolina'] 
+for magician in magicians: 
+    print(magician.title() + ", that was a great trick!")  
+    print("I can't wait to see your next trick, " + magician.title() + ".\n")     
+    
+print("Thank you everyone, that was a great magic show!")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
