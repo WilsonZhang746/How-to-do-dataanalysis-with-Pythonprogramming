@@ -161,6 +161,93 @@ print("Thank you everyone, that was a great magic show!")
 
 
 
+##lecture 5. Making Numerical Lists
+#Using the range() Function
+for value in range(1,5):
+    print(value)
+
+#Using range() to Make a List of Numbers
+#using list() to make a list
+numbers = list(range(1,6)) 
+print(numbers) 
+
+
+#list the even numbers between 1 and 10
+even_numbers = list(range(2,11,2)) 
+print(even_numbers)
+
+
+#using append()
+squares = []
+for value in range(1,11):
+    square = value**2
+    squares.append(square)
+    
+print(squares)
+
+#To write this code more concisely
+squares = []
+for value in range(1,11):
+    squares.append(value**2)
+print(squares)
+
+
+
+##Lecture 6. List comprehension and Working with Part of a List
+#List comprehension
+squares = [value**2 for value in range(1,11)]
+print(squares)
+
+#Working with Part of a List
+#Slicing a List
+players = ['charles', 'martina', 'michael', 'florence', 'eli']
+print(players[0:3])         #return first three elements
+print(players[1:4])         #return second ,third,fourth element
+print(players[:4])      #automatically starts your slice at the beginning of the list
+print(players[2:])      #slice that includes the end of a list
+print(players[-3:])    #the last three players
+
+players = ['charles', 'martina', 'michael', 'florence', 'eli'] 
+print("Here are the first three players on my team:")
+for player in players[:3]:
+    print(player.title())
+    
+#copying a list
+#if you copy a list, must use slice form
+my_foods = ['pizza', 'falafel', 'carrot cake'] 
+friend_foods = my_foods[:]     #useing slice form to copy a list
+
+print("My favorite foods are:")
+print(my_foods)
+
+print("\nMy friend's favorite foods are:")
+print(friend_foods)
+
+#To prove that we actually have two separate lists
+my_foods.append('cannoli') 
+friend_foods.append('ice cream') 
+
+print("My favorite foods are:")
+print(my_foods)
+
+print("\nMy friend's favorite foods are:")
+print(friend_foods)
+
+
+#using this form if to connect two list, then append item into one list
+#will also do for the other
+my_foods = ['pizza', 'falafel', 'carrot cake']
+friend_foods = my_foods
+my_foods.append('cannoli')
+friend_foods.append('ice cream')
+print("My favorite foods are:")
+print(my_foods)
+print("\nMy friend's favorite foods are:")
+print(friend_foods)
+
+
+
+
 
 
 
