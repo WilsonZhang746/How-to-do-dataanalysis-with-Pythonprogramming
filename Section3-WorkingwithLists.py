@@ -246,6 +246,28 @@ print("\nMy friend's favorite foods are:")
 print(friend_foods)
 
 
+##Lecture 7. tuples
+dimensions = (200, 50)
+print(dimensions[0])
+print(dimensions[1])
+
+#change one of the items in the tuple
+dimensions = (200, 50)
+dimensions[0] = 250
+
+#looping over all values in a tuple
+dimensions = (200, 50)
+print("Original dimensions:")
+for dimension in dimensions:
+    print(dimension)
+    
+#Writing over a Tuple   
+dimensions = (400, 100)
+print("\nModified dimensions:")
+for dimension in dimensions:
+    print(dimension)
+
+
 
 
 
