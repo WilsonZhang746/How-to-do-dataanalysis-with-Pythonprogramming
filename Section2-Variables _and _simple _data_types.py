@@ -3,9 +3,9 @@
 Created on Sun Dec 11 22:14:40 2022
 How to do data analysis with Python programming
 
-@author: Wei Zhang
+@author: https://www.youtube.com/@easydatascience2508
 """
-##Section 2, Section 2 Variables and simple data types
+##Section 2 Variables and simple data types
 
 ##Lecture 1. String Variables
 message = "Hello Python world!"

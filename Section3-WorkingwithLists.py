@@ -3,7 +3,7 @@
 Created on Tue Dec 13 12:45:46 2022
 How to do data analysis with Python programming
 
-@author: Wei Zhang
+@author: https://www.youtube.com/@easydatascience2508
 """
 
 ##Section 3 Working with Lists
