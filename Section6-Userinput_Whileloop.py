@@ -117,6 +117,7 @@ while current_number < 10:
 
 
 
+
 ##Lecture 5 Using a while Loop with Lists
 #Moving Items from One List to Another
 # Start out with some users that need to be verified,
