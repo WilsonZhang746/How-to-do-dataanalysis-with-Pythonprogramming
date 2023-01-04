@@ -185,6 +185,67 @@ while True:
         
         
 ##Lecture 4. Handling the FileNotFoundError Exception
+#try to open and read a file which has not been saved in the
+#current working directory
+#FileNotFoundError
+filename = 'alice1.txt'
+with open(filename) as f_obj:
+    contents = f_obj.read()
+ 
+    
+#Use a try-except block instead
+filename = 'alice1.txt'
+
+try:
+    with open(filename) as f_obj:
+        contents = f_obj.read()
+except FileNotFoundError:
+    msg = "Sorry, the file " + filename + " does not exist."
+    print(msg)
+    
+
+#analyze text with try-except-else block    
+filename = 'alice.txt'
+
+try:
+    with open(filename) as f_obj:
+        contents = f_obj.read()
+except FileNotFoundError:
+    msg = "Sorry, the file " + filename + " does not exist."
+    print(msg)
+else:
+    # Count the approximate number of words in the file.
+    words = contents.split()
+    num_words = len(words)
+    print("The file " + filename + " has about " + str(num_words) + " words.")
+    
+
+
+#Create a function holding try-except-else block
+#working with multiple books
+def count_words(filename):
+    """Count the approximate number of words in a file."""
+    try:
+        with open(filename, encoding='utf-8') as f_obj:
+            contents = f_obj.read() 
+    except FileNotFoundError:
+        msg = "Sorry, the file " + filename + " does not exist."
+        print(msg)
+    else:
+        # Count approximate number of words in the file.
+        words = contents.split()
+        num_words = len(words)
+        print("The file " + filename + " has about " + str(num_words) + " words.")
+
+filenames = ['alice.txt', 'siddhartha1.txt', 'moby_dick.txt', 'little_women.txt']
+for filename in filenames:
+    count_words(filename)
+
+
+    
+
+    
+    
 
 
     
