@@ -156,6 +156,7 @@ try:
     print(5/0)
 except ZeroDivisionError:
     print("You can't divide by zero!")
+
     
     
 #Using Exceptions to Prevent Crashes
@@ -247,6 +248,47 @@ for filename in filenames:
     
     
 
+
+##Lecture 5. Using Try, Except, else and Finally in Python
+#Try, Except, else and Finally
+def divide(x, y):
+    try:
+        # Floor Division : Gives only Fractional
+        # Part as Answer
+        result = x // y
+    except ZeroDivisionError:
+        print("Sorry ! You are dividing by zero ")
+    else:
+        print("Yeah ! Your answer is :", result)
+    finally: 
+        # this block is always executed  
+        # regardless of exception generation. 
+        print('This is always executed')  
+        
+# Look at parameters and note the working of Program
+divide(3, 2)
+divide(3, 0)      
+
+
+
+#Failing Silently with pass
+#Failing Silently and do nothing with error
+def count_words(filename):
+    """Count the approximate number of words in a file."""
+    try:
+        with open(filename) as f_obj:
+            contents = f_obj.read() 
+    except FileNotFoundError:
+        pass
+    else:
+        # Count approximate number of words in the file.
+        words = contents.split()
+        num_words = len(words)
+        print("The file " + filename + " has about " + str(num_words) + " words.")
+
+filenames = ['alice.txt', 'siddhartha1.txt', 'moby_dick.txt', 'little_women.txt']
+for filename in filenames:
+    count_words(filename)  
 
     
 
