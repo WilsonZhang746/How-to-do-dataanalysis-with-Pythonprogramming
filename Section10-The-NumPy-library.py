@@ -451,50 +451,98 @@ A3
 
 # ## Lecture 6. Copies and Views, difference between NumPy arrays and Python lists
 
-# ### Copies or Views of Objects
-
-# In[3]:
-
-
+# ### Copies or Views of NumPy arrays
+#assignment
+import numpy as np
 a = np.array([1, 2, 3, 4])
 b = a
 b
-
-
-# In[4]:
 
 
 a[2] = 0
 b
 
 
-# In[6]:
-
-
+#slicing
 c = a[0:2]
 c
-
-
-# In[7]:
-
 
 a[0] = 0
 c
 
-
-# In[8]:
-
-
+#use copy()
 a = np.array([1, 2, 3, 4])
 c = a.copy()
 c
 
 
-# In[9]:
-
-
 a[0] = 0
 c
+
+
+
+##Python lists
+#assignment
+a  = [1,2,3,4]
+b = a
+
+b.append(5)
+a[1] = 10
+b
+
+a
+
+
+#slicing
+a = [1,2,3,4]
+f = a[:3]
+
+f
+
+a
+
+a[1] = 10
+f.append(100)
+
+
+#use copy()
+a=[1,2,3,4]
+c = a.copy()
+
+a
+c
+
+a[1]=10
+c.append(10)
+
+a
+c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ### Broadcasting
