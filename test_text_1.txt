@@ -1,0 +1,7 @@
+index name
+1     Wilson
+2     Shirley
+3     Olav
+4     Lu
+5     Molde
+6     Larsen

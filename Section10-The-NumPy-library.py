@@ -545,140 +545,305 @@ c
 
 
 
-# ### Broadcasting
+# ### Lecture 7. Broadcasting
 
-# In[10]:
-
-
+import numpy as np
+#add a matrix with a one-dimensioanl array
 A = np.arange(16).reshape(4, 4)
 b = np.arange(4)
 A
-
-
-# In[11]:
-
-
 b
-
-
-# In[12]:
-
-
 A + b
 
+#demean each column of an array by subtracting the column
+#means.
 
-# In[13]:
-
-
-m = np.arange(6).reshape(3, 1, 2)
-n = np.arange(6).reshape(3, 2, 1)
-m
-
-
-# In[14]:
+arr = np.random.randn(4, 3)
+arr.mean(0)
+demeaned = arr - arr.mean(0)
+demeaned
+demeaned.mean(0)
 
 
-n
+
+#demean each row of an array by subtracting the row
+#means, need to reshape first
+arr
+row_means = arr.mean(1)
+row_means.shape
+row_means.reshape((4, 1))
+demeaned = arr - row_means.reshape((4, 1))  #need to reshape first
+demeaned.mean(1)
 
 
-# In[15]:
+
+## Broadcasting with higher dimensions
+#using np.newaxis() function to reshape
+arr = np.zeros((4, 4))
+arr_3d = arr[:, np.newaxis, :]
+arr_3d.shape
+arr_1d = np.random.normal(size=3)
+arr_1d[:, np.newaxis]       # (3,1)
+arr_1d[np.newaxis, :]       # (1,3)
 
 
-m + n
+# In[ ]:
+
+#If we had a three-dimensional array and wanted to 
+#demean axis 2
+
+arr = np.random.randn(3, 4, 5)
+depth_means = arr.mean(2)
+depth_means
+depth_means.shape        # (3, 4)
+demeaned = arr - depth_means[:, :, np.newaxis]
+demeaned.mean(2)
 
 
-# In[16]:
 
 
-structured = np.array([(1, 'First', 0.5, 1+2j),(2, 'Second', 1.3, 2-2j),
-                      (3, 'Third', 0.8, 1+3j)],dtype=('i2, a6, f4, c8'))
-structured
 
 
-# In[17]:
 
 
-structured = np.array([(1, 'First', 0.5, 1+2j),(2, 'Second', 1.3, 2-2j),
-                      (3, 'Third', 0.8, 1+3j)],dtype=('int16, a6, float32, complex64'))
-structured
 
 
-# In[18]:
 
 
-structured['f1']
 
 
-# In[19]:
 
 
-structured = np.array([(1, 'First', 0.5, 1+2j),(2, 'Second', 1.3, 2-2j),(3, 'Third', 0.8, 1+3j)],
-                      dtype=[('id', 'i2'),('position','a6'),('value','f4'),('complex','c8')])
-structured
 
 
-# In[20]:
 
 
-structured.dtype.names = ('id','order','value','complex')
 
 
-# In[21]:
 
 
-structured['order']
 
 
-# ## Reading and Writing Array Data on Files
+
+
+##lecture 8. Random number generation in Python and NumPy
+#Generating random number in Python using random()
+#generates a random float number between 0.0 and 1.0
+import random
+num = random.random()
+print(num)
+
+
+#Generating a random item using choice()
+import random
+ 
+# prints a random value from the list
+list1 = [1, 2, 3, 4, 5, 6]
+print(random.choice(list1))
+ 
+# prints a random item from the string
+string = "striver"
+print(random.choice(string))
+
+
+#TGenerating random numbers from a specified range and step 
+#using randrange()
+# using randrange() to generate in range from 20
+# to 50. The last parameter 3 is step size to skip
+# three numbers when selecting.
+print(random.randrange(20, 50, 3))
+
+
+
+#The seed function is used to save the state of a random 
+#function so that it can generate same random numbers on 
+#multiple executions
+# using seed() to seed different random number
+random.seed(7)
+ 
+# printing mapped random number
+print("The mapped random number with 7 is : ", end="")
+print(random.random())
+ 
+# using seed() to seed to 5 again
+random.seed(5)
+ 
+# printing mapped random number
+print("The mapped random number with 5 is : ", end="")
+print(random.random())
+
+# using seed() to seed to 7 again
+random.seed(7)
+ 
+# printing mapped random number
+print("The mapped random number with 7 is : ", end="")
+print(random.random())
+
+
+
+#Generating random number list in Python using shuffle()
+import random
+ 
+ 
+# declare a list
+sample_list = ['A', 'B', 'C', 'D', 'E']
+ 
+print("Original list : ")
+print(sample_list)
+ 
+# first shuffle
+random.shuffle(sample_list)
+print("\nAfter the first shuffle : ")
+print(sample_list)
+
+# second shuffle
+random.shuffle(sample_list)
+print("\nAfter the second shuffle : ")
+print(sample_list)
+
+
+
+
+#Generating random number list in Python using uniform()
+#using uniform() to generate random floating number in range
+# prints number between 5 and 10
+print(random.uniform(5, 10))
+
+
+
+
+
+
+##Random Number Generation with NumPy’s random module
+#generate a 4 × 4 array of samples from the standard 
+#normal distribution using normal()
+import numpy as np
+#standard normal distribution 
+samples = np.random.normal(size=(4, 4))
+samples
+
+#normal distribution with mean 5 standard deviation 2
+samples = np.random.normal(5,2,size=(4, 4))
+samples
+
+
+#set random seed()
+np.random.seed(1234)
+samples = np.random.normal(size=(4, 4))
+samples
+
+
+#standard normal also
+np.random.randn(10)
+
+
+
+# to shuffle an numpy array
+import numpy as np
+ 
+# Assign array
+arr = np.array([1, 2, 3, 4, 5, 6])
+ 
+# Display original array
+print("Original array: ", arr)
+ 
+# Shuffle array
+np.random.shuffle(arr)
+ 
+# Display shuffled array
+print("Shuffled array: ", arr)
+
+
+
+#numpy.random.permutation() method, to get the random samples 
+#of sequence of permutation
+#get the random sequence permutation of an array
+import numpy as np
+  
+gfg = np.random.permutation(20)
+gfg
+
+
+#get the random sequence permutation of a 2-dimensional array
+arr = np.arange(12).reshape((4, 3))
+gfg = np.random.permutation(arr)
+gfg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 9. Reading and Writing NumPy Array Data on Files
 
 # ### Loading and Saving Data in Binary Files
-
-# In[22]:
-
-
 data = np.random.random(12)
 data = data.reshape(4,3)
 data
 
 
-# In[23]:
-
-
 np.save('saved_data', data)
-
-
-# In[24]:
 
 
 loaded_data = np.load('saved_data.npy')
 loaded_data
 
 
-# ### Reading File with Tabular Data 
+# ### Reading File with Tabular Data using genfromtxt()
 
-# In[25]:
-
-
-data = np.genfromtxt('ch3_data.csv', delimiter=',', names=True)
+data = np.genfromtxt('tab_data.csv', delimiter=',', names=True)
 data
 
 
-# In[26]:
+data['id']
 
 
-data2 = np.genfromtxt('ch3_data2.csv', delimiter=',', names=True)
-data2
+data[0]
+
+#missing value
+data = np.genfromtxt('tab_data_miss.csv', delimiter=',', names=True)
+data
 
 
-# In[27]:
+data['id']
 
 
-data2['id']
+data[0]
+data[1]
 
 
-# In[28]:
+
+#Reading File with Tabular Data using numpy.loadtxt( )
+#numpy.loadtxt( ) is equivalent function to 
+#numpy.genfromtxt( ) when no data is missing.
+# Text file data converted to integer data type
+File_data = np.loadtxt("number1.txt", dtype=int)
+print(File_data)
 
 
-data2[0]
+
+# skipping first row
+# converting file data to string
+data = np.loadtxt("test_text_1.txt", skiprows=1, dtype='str')
+print(data)
+
+
+
 
 
