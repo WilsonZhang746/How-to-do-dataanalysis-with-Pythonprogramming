@@ -787,39 +787,35 @@ ser.rank(ascending=False)
 
 
 
-# ## Lecture 10. "Not a Number" Data
+# ## Lecture 10. Handling "Not a Number" Data with Pandas Data Structures
 
 # ### Assigning a NaN Value
-
-# In[88]:
-
-
+import pandas as pd
+import numpy as np
 ser = pd.Series([0,1,2,np.NaN,9], index=['red','blue','yellow','white','green'])
 ser
 
 
-# In[89]:
-
-
 ser['white'] = None
+ser['white'] = np.NaN
 ser
 
 
+
+frame = pd.DataFrame(np.arange(16).reshape((4,4)),
+          index=['red', 'blue', 'yellow', 'white'],
+          columns=['ball','pen','pencil','paper'])
+frame
+
+frame['ball']['red'] = np.NaN
+frame['ball']['red'] = None
+
 # ### FIltering Out NaN Values
-
-# In[90]:
-
 
 ser.dropna()
 
-
-# In[91]:
-
-
 ser[ser.notnull()]
 
-
-# In[92]:
 
 
 frame3 = pd.DataFrame([[6,np.nan,6],[np.nan,np.nan,np.nan],[2,np.nan,5]],
@@ -828,13 +824,8 @@ frame3 = pd.DataFrame([[6,np.nan,6],[np.nan,np.nan,np.nan],[2,np.nan,5]],
 frame3
 
 
-# In[93]:
-
 
 frame3.dropna()
-
-
-# In[94]:
 
 
 frame3.dropna(how='all')
@@ -842,13 +833,8 @@ frame3.dropna(how='all')
 
 # ### Filliing in NaN Occurrences
 
-# In[140]:
-
 
 frame3.fillna(0)
-
-
-# In[141]:
 
 
 frame3.fillna({'ball':1, 'mug':0, 'pen': 99})
@@ -879,10 +865,10 @@ frame3.fillna({'ball':1, 'mug':0, 'pen': 99})
 
 
 
-# ## Lecture 11. Hierarchical Indexing and Leveling
+# ## Lecture 11. Hierarchical Indexing and Leveling of Pandas Data Structures
 
-# In[142]:
-
+import pandas as pd
+import numpy as np
 
 mser = pd.Series(np.random.rand(8),
                 index=[['white','white','white','blue','blue','red','red','red'],
@@ -890,49 +876,28 @@ mser = pd.Series(np.random.rand(8),
 mser
 
 
-# In[143]:
-
-
 mser.index
-
-
-# In[144]:
 
 
 mser['white']
 
 
-# In[145]:
-
-
 mser[:,'up']
-
-
-# In[146]:
 
 
 mser['white','up']
 
 
-# In[147]:
-
-
 mser.unstack()
 
 
-# In[148]:
-
-
+frame = pd.DataFrame(np.arange(16).reshape((4,4)),
+          index=['red', 'blue', 'yellow', 'white'],
+          columns=['ball','pen','pencil','paper'])
 frame
 
 
-# In[149]:
-
-
 frame.stack()
-
-
-# In[151]:
 
 
 mframe = pd.DataFrame(np.random.randn(16).reshape(4,4),
@@ -943,21 +908,13 @@ mframe
 
 # # Reordering and Sorting Levels
 
-# In[152]:
-
 
 mframe.columns.names = ['objects','id']
 mframe.index.names = ['colors','status']
 mframe
 
 
-# In[153]:
-
-
 mframe.swaplevel('colors','status')
-
-
-# In[157]:
 
 
 mframe.sort_index(level='colors')
@@ -965,13 +922,8 @@ mframe.sort_index(level='colors')
 
 # ### Summary Statistic by Level
 
-# In[158]:
-
 
 mframe.sum(level='colors')
-
-
-# In[159]:
 
 
 mframe.sum(level='id',axis=1)
