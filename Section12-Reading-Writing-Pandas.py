@@ -76,24 +76,44 @@ pd.read_csv('sec12_02.csv',skiprows=[2],nrows=3,header=None)
 
 
 
-# ### Lecture 2. Using RegExp to Parse TXT Files with Pandas
+# ### Lecture 2. Using Regular Expressions to Parse TXT Files with Pandas
 
-# In[8]:
+import numpy as np
+import pandas as pd
 
-
-pd.read_table('ch05_04.txt', sep='\s+', engine='python')
-
-
-# In[9]:
-
-
-pd.read_table('ch05_05.txt', sep='\D+', header=None, engine='python')
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 
-# In[10]:
+pd.read_table('sec12_04.txt', sep='\s+', engine='python')
 
 
-pd.read_table('ch05_06.txt', sep=',', skiprows=[0,1,3,6])
+
+pd.read_table('sec12_05.txt', sep='\D+', header=None, engine='python')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
