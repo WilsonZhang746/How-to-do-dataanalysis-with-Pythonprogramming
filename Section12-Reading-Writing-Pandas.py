@@ -118,9 +118,15 @@ pd.read_table('sec12_05.txt', sep='\D+', header=None, engine='python')
 
 
 
-# ### Writing Data in CSV
+# ### Lecture 3.Writing Data in CSV with Pandas
 
-# In[13]:
+import numpy as np
+import pandas as pd
+
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 
 frame = pd.DataFrame(np.arange(16).reshape((4,4)),
@@ -129,23 +135,12 @@ frame = pd.DataFrame(np.arange(16).reshape((4,4)),
 frame
 
 
-# In[14]:
+frame.to_csv('sec12_07.csv')
 
 
-frame.to_csv('ch05_07.csv')
-frame2 = pd.read_csv('ch05_07.csv')
-frame2
 
+frame.to_csv('sec12_07b.csv', index=False, header=False)
 
-# In[15]:
-
-
-frame.to_csv('ch05_07b.csv', index=False, header=False)
-frame2 = pd.read_csv('ch05_07b.csv')
-frame2
-
-
-# In[16]:
 
 
 frame3 = pd.DataFrame([[6,np.nan,np.nan,6,np.nan],
@@ -158,23 +153,85 @@ frame3 = pd.DataFrame([[6,np.nan,np.nan,6,np.nan],
                      columns=['ball','mug','paper','pen','pencil'])
 
 
-# In[17]:
+frame3.to_csv('sec12_08.csv')
 
 
-frame3.to_csv('ch5_08.csv')
-frame4 = pd.read_csv('ch5_08.csv')
-frame4
+frame3.to_csv('sec12_09.csv', na_rep = 'NaN')
 
 
-# In[18]:
 
 
-frame3.to_csv('ch5_09.csv', na_rep = 'NaN')
-frame5 = pd.read_csv('ch5_09.csv')
-frame5
 
 
-# ## Reading and Writing HTML Files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 4.Reading and Writing Data on Microsoft Excel Files with Pandas
+
+import numpy as np
+import pandas as pd
+
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+pd.read_excel('sec12_data.xlsx',index_col=0)
+
+pd.read_excel('sec12_data.xlsx', 'Sheet2',index_col=0)
+
+pd.read_excel('sec12_data.xlsx', 1 ,index_col=0)
+
+
+#write to excel
+
+
+frame = pd.DataFrame(np.random.random((4,4)),
+                    index = ['exp1','exp2','exp3','exp4'],
+                    columns = ['Jan2015','Feb2015','Mar2015','Apr2015'])
+frame
+
+frame.to_excel('sec12_data02.xlsx')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 5. Reading and Writing HTML Files with Pandas
 
 # ### Writing Data in HTML
 
@@ -301,39 +358,6 @@ def etree2df(root):
 etree2df(root)
 
 
-# ## Reading and Writing Data on Microsoft Excel Files
-
-# In[51]:
-
-
-pd.read_excel('ch05_data.xlsx')
-
-
-# In[52]:
-
-
-pd.read_excel('ch05_data.xlsx','Sheet2')
-
-
-# In[53]:
-
-
-pd.read_excel('ch05_data.xlsx',1)
-
-
-# In[54]:
-
-
-frame = pd.DataFrame(np.random.random((4,4)),
-                    index = ['exp1','exp2','exp3','exp4'],
-                    columns = ['Jan2015','Feb2015','Mar2015','Apr2015'])
-frame
-
-
-# In[55]:
-
-
-frame.to_excel('ch05_data02.xlsx')
 
 
 # ## JSON Data
