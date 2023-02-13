@@ -235,23 +235,24 @@ frame.to_excel('sec12_data02.xlsx')
 
 # ### Writing Data in HTML
 
-# In[36]:
+import numpy as np
+import pandas as pd
+
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 
 frame = pd.DataFrame(np.arange(4).reshape(2,2))
 print(frame.to_html())
 
 
-# In[37]:
-
 
 frame = pd.DataFrame( np.random.random((4,4)),
                     index = ['white','black','red','blue'],
                     columns = ['up','down','right','left'])
 frame
-
-
-# In[38]:
 
 
 s = ['<HTML>']
@@ -262,9 +263,6 @@ s.append('</BODY></HTML>')
 html = ''.join(s)
 
 
-# In[39]:
-
-
 html_file = open('myFrame.html','w')
 html_file.write(html)
 html_file.close()
@@ -272,23 +270,46 @@ html_file.close()
 
 # ### Reading Data from an HTML File
 
-# In[40]:
-
-
 web_frames = pd.read_html('myFrame.html')
 web_frames[0]
 
 
-# In[41]:
-
 
 ranking = pd.read_html('https://www.meccanismocomplesso.org/en/meccanismo-complesso-sito-2/classifica-punteggio/')
+
 ranking[0]
 
 
-# ### Reading Data from XML
 
-# In[42]:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Lecture6. Reading Data from XML
+
+import numpy as np
+import pandas as pd
+
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 
 from lxml import objectify
@@ -296,37 +317,20 @@ xml = objectify.parse('books.xml')
 xml
 
 
-# In[43]:
-
-
 root = xml.getroot()
 
-
-# In[44]:
-
-
 root.Book.Author
-
-
-# In[45]:
 
 
 root.Book.PublishDate
 
 
-# In[46]:
-
-
 root.getchildren()
 
-
-# In[47]:
 
 
 [child.tag for child in root.Book.getchildren()]
 
-
-# In[48]:
 
 
 [child.text for child in root.Book.getchildren()]
@@ -352,10 +356,28 @@ def etree2df(root):
     return xmlframe
 
 
-# In[50]:
-
-
 etree2df(root)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
