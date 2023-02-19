@@ -1,0 +1,933 @@
+"""
+Created on Tue Dec 13 12:45:46 2022
+How to do data analysis with Python programming
+
+@author: https://www.youtube.com/@easydatascience2508
+"""
+
+
+### Section 13. pandas in Depth: Data Manipulation
+##Lecture 1. Merging Datasets with Pandas
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+frame1 = pd.DataFrame( {'id':['ball','pencil','pen','mug','ashtray'],
+                        'price': [12.33,11.44,33.21,13.23,33.62]})
+frame1
+
+frame2 = pd.DataFrame( {'id': ['pencil','pencil','ball','pen'],
+                        'color':['white','red','red','black']})
+frame2
+
+pd.merge(frame1,frame2)
+
+
+frame1 = pd.DataFrame( {'id': ['ball','pencil','pen',',mug','ashtray'],
+                        'color': ['white','red','red','black','green'],
+                        'brand': ['OMG','ABC','ABC','POD','PPOD']})
+frame1
+
+frame2 = pd.DataFrame( {'id':['pencil','pencil','ball','pen'],
+                        'brand': ['OMG','POD','ABC','POD']})
+frame2
+
+
+pd.merge(frame1,frame2)
+
+
+pd.merge(frame1, frame2, on='id')
+
+
+pd.merge(frame1, frame2, on='brand')
+
+
+frame2.columns = ['sid', 'brand']
+frame2
+
+
+pd.merge(frame1, frame2, left_on='id', right_on='sid')
+
+
+
+frame2.columns = ['id','brand']
+pd.merge(frame1,frame2,on='id')
+
+
+
+pd.merge(frame1,frame2,on='id',how='outer')
+
+
+pd.merge(frame1,frame2,on='id',how='left')
+
+
+pd.merge(frame1,frame2,on='id',how='right')
+
+
+pd.merge(frame1,frame2,on=['id','brand'], how='outer')
+
+
+# ### Merging on Index
+
+pd.merge(frame1,frame2,right_index=True, left_index=True)
+
+pd.merge(frame1,frame2,right_index=True, left_index=True, how='outer')
+
+
+frame1.join(frame2)
+
+
+
+frame2.columns = ['id2','brand2']
+frame1.join(frame2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 2.Concatenating Datasets with Numpy and Pandas
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+#concatenating Numpy arrays
+array1 = np.arange(9).reshape((3,3))
+array1
+
+array2 = np.arange(9).reshape((3,3))+6
+array2
+
+
+np.concatenate([array1,array2],axis=1)
+
+
+np.concatenate([array1,array2],axis=0)
+
+
+
+
+#concatenating Pandas Series and Dataframes
+ser1 = pd.Series(np.random.rand(4), index=[1,2,3,4])
+ser1
+
+
+ser2 = pd.Series(np.random.rand(4), index=[5,6,7,8])
+ser2
+
+
+pd.concat([ser1,ser2])
+
+
+pd.concat([ser1,ser2], axis=1)
+
+
+
+pd.concat([ser1,ser2], keys=[1,2])
+
+
+
+pd.concat([ser1,ser2], axis=1, keys=[1,2])
+
+
+
+frame1 = pd.DataFrame(np.random.rand(9).reshape(3,3), index=[1,2,3], columns=['A','B','C'])
+frame2 = pd.DataFrame(np.random.rand(9).reshape(3,3), index=[4,5,6], columns=['A','B','C'])
+pd.concat([frame1, frame2])
+
+
+pd.concat([frame1, frame2], axis=1)
+
+
+
+# ### Combining datasets
+
+
+ser1 = pd.Series(np.random.rand(5), index=[1,2,3,4,5])
+ser1
+
+
+ser2 = pd.Series(np.random.rand(4), index=[2,4,5,6])
+ser2
+
+
+ser1.combine_first(ser2)
+
+
+ser2.combine_first(ser1)
+
+
+ser1[:3].combine_first(ser2[:3])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 3. Pivoting,Stacking,Unstacking,Long and Wide forms of Datasets with Pandas
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+# ### Pivoting with Hierarchical Indexing
+
+frame1 = pd.DataFrame(np.arange(9).reshape(3,3),
+                     index=['white','black','red'],
+                     columns=['ball','pen','pencil'])
+frame1
+
+
+ser = frame1.stack()
+ser
+
+
+ser.unstack()
+
+
+ser.unstack(0)
+
+
+# ### Pivoting from "Long" to "Wide" Format
+
+longframe = pd.DataFrame({ 'color':['white','white','white',
+                                    'red','red','red',
+                                    'black','black','black'],
+                           'item':['ball','pen','mug',
+                                   'ball','pen','mug',
+                                   'ball','pen','mug'],
+                           'value': np.random.rand(9)})
+longframe
+
+
+wideframe = longframe.pivot('color','item')
+wideframe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Lecture 4.Removing, Mapping, Renaming Operations with Pandas
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+#removing rows or columns
+
+frame1 = pd.DataFrame(np.arange(9).reshape(3,3),
+                       index=['white','black','red'],
+                       columns=['ball','pen','pencil'])
+frame1
+
+
+
+del frame1['ball']
+frame1
+
+
+
+frame1.drop('white')
+
+
+
+# ### Removing Duplicates
+
+dframe = pd.DataFrame({ 'color': ['white','white','red','red','white'],
+                        'value': [2,1,3,3,2]})
+dframe
+
+
+dframe.duplicated()
+
+
+dframe[dframe.duplicated()]
+
+
+# ### Replacing Values via Mapping
+
+frame = pd.DataFrame({ 'item':['ball','mug','pen','pencil','ashtray'],
+                       'color':['white','rosso','verde','black','yellow'],
+                       'price':[5.56,4.20,1.30,0.56,2.75]})
+frame
+
+
+newcolors = {
+    'rosso': 'red',
+    'verde': 'green'
+}
+
+
+frame.replace(newcolors)
+
+
+ser = pd.Series([1,3,np.nan,4,6,np.nan,3])
+ser
+
+
+ser.replace(np.nan,0)
+
+
+# ### Adding Values via Mapping
+
+
+frame = pd.DataFrame({'item':['ball','mug','pen','pencil','ashtray'],
+                      'color':['white','red','green','black','yellow']})
+frame
+
+
+price = {
+    'ball': 5.56,
+    'mug': 4.20,
+    'bottle': 1.30,
+    'scissors': 3.41,
+    'pen': 1.30,
+    'pencil': 0.56,
+    'ashtray': 2.75
+}
+
+
+
+frame['price'] = frame['item'].map(price)
+frame
+
+
+# ### Rename the Indexes of the Axes
+frame
+
+
+reindex = {
+    0: 'first',
+    1: 'second',
+    2: 'third',
+    3: 'fourth',
+    4: 'fifth'
+}
+frame.rename(reindex)
+
+
+recolumn = {
+    'item': 'object',
+    'prince': 'value'
+}
+frame.rename(index=reindex, columns=recolumn)
+
+
+frame.rename(index={1:'first'}, columns={'item':'object'})
+
+
+frame.rename(columns={'item':'object'}, inplace=True)
+
+
+frame
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Discretization and Binning
+
+# In[60]:
+
+
+results = [12,34,67,55,28,90,99,12,3,56,74,44,87,23,49,89,87]
+bins = [0,25,50,75,100]
+cat = pd.cut(results, bins)
+cat
+
+
+# In[61]:
+
+
+cat.categories
+
+
+# In[62]:
+
+
+cat.codes
+
+
+# In[63]:
+
+
+pd.value_counts(cat)
+
+
+# In[64]:
+
+
+bin_names = ['unlikely','less likely','likely','highly likely']
+pd.cut(results, bins, labels=bin_names)
+
+
+# In[65]:
+
+
+pd.cut(results, 5)
+
+
+# In[66]:
+
+
+quintiles = pd.qcut(results, 5)
+quintiles
+
+
+# In[67]:
+
+
+pd.value_counts(quintiles)
+
+
+# ### Detecting and Filtering Outliers
+
+# In[68]:
+
+
+randframe = pd.DataFrame(np.random.randn(1000,3))
+randframe.describe()
+
+
+# In[69]:
+
+
+randframe.std()
+
+
+# In[70]:
+
+
+randframe[(np.abs(randframe) > (3*randframe.std())).any(1)]
+
+
+# ## Permutation
+
+# In[71]:
+
+
+nframe = pd.DataFrame(np.arange(25).reshape(5,5))
+nframe
+
+
+# In[72]:
+
+
+new_order = np.random.permutation(5)
+new_order
+
+
+# In[73]:
+
+
+nframe.take(new_order)
+
+
+# In[74]:
+
+
+new_order = [3,4,2]
+nframe.take(new_order)
+
+
+# ### Random Sampling
+
+# In[75]:
+
+
+sample = np.random.randint(0, len(nframe), size=3)
+sample
+
+
+# In[76]:
+
+
+nframe.take(sample)
+
+
+# ## String Manipulation
+
+# ### Built-in Methods for Manipulation of Strings
+
+# In[77]:
+
+
+text = '16 Bolton Avenue , Boston'
+text.split(',')
+
+
+# In[78]:
+
+
+tokens = [s.strip() for s in text.split(',')]
+tokens
+
+
+# In[79]:
+
+
+address, city = [s.strip() for s in text.split(',')]
+address
+
+
+# In[80]:
+
+
+city
+
+
+# In[81]:
+
+
+address + ',' + city
+
+
+# In[82]:
+
+
+strings = ['A+', 'A', 'A-', 'B', 'BB', 'BBB', 'C+']
+';'.join(strings)
+
+
+# In[83]:
+
+
+'Boston' in text
+
+
+# In[84]:
+
+
+text.index('Boston')
+
+
+# In[85]:
+
+
+text.find('Boston')
+
+
+# In[86]:
+
+
+text.index('New York')
+
+
+# In[ ]:
+
+
+text.find('New York')
+
+
+# In[ ]:
+
+
+text.count('e')
+
+
+# In[ ]:
+
+
+text.count('Avenue')
+
+
+# In[87]:
+
+
+text.replace('Avenue','Street')
+
+
+# In[88]:
+
+
+text.replace('1','')
+
+
+# ### Regular Expressions
+
+# In[89]:
+
+
+import re
+
+
+# In[90]:
+
+
+text = "This is      an\t odd   \n text!"
+re.split('\s+', text)
+
+
+# In[91]:
+
+
+regex = re.compile('\s+')
+
+
+# In[92]:
+
+
+regex.split(text)
+
+
+# In[93]:
+
+
+text = 'This is my address: 16 Bolton Avenue, Boston'
+re.findall('A\w+', text)
+
+
+# In[94]:
+
+
+re.findall('[A,a]\w+', text)
+
+
+# In[95]:
+
+
+re.search('[A,a]\w+', text)
+
+
+# In[96]:
+
+
+search = re.search('[A,a]\w+', text)
+search.start()
+
+
+# In[97]:
+
+
+search.end()
+
+
+# In[98]:
+
+
+text[search.start():search.end()]
+
+
+# In[99]:
+
+
+re.match('[A,a]\w+', text)
+
+
+# In[100]:
+
+
+re.match('T\w+', text)
+
+
+# In[101]:
+
+
+match = re.match('T\w+', text)
+text[match.start():match.end()]
+
+
+# ## Data Aggregation
+
+# ### A Practical Example
+
+# In[102]:
+
+
+frame = pd.DataFrame({ 'color': ['white','red','green','red','green'],
+                       'object': ['pen','pencil','pencil','ashtray','pen'],
+                       'price1': [5.56, 4.20, 1.30, 0.56, 2.75],
+                       'price2': [4.75,4.12,1.60,0.75,3.15]})
+frame
+
+
+# In[103]:
+
+
+group = frame['price1'].groupby(frame['color'])
+group
+
+
+# In[104]:
+
+
+group.groups
+
+
+# In[105]:
+
+
+group.mean()
+
+
+# In[106]:
+
+
+group.sum()
+
+
+# ### Hierarchical Grouping
+
+# In[107]:
+
+
+ggroup = frame['price1'].groupby([frame['color'],frame['object']])
+ggroup.groups
+
+
+# In[108]:
+
+
+ggroup.sum()
+
+
+# In[109]:
+
+
+frame[['price1','price2']].groupby(frame['color']).mean()
+
+
+# In[110]:
+
+
+frame.groupby(frame['color']).mean()
+
+
+# ## Group Iteration
+
+# In[111]:
+
+
+for name, group in frame.groupby('color'):
+    print(name)
+    print(group)
+
+
+# ### Chain of Transformations
+
+# In[112]:
+
+
+result1 = frame['price1'].groupby(frame['color']).mean()
+type(result1)
+
+
+# In[113]:
+
+
+result2 = frame.groupby(frame['color']).mean()
+type(result2)
+
+
+# In[114]:
+
+
+frame['price1'].groupby(frame['color']).mean()
+
+
+# In[115]:
+
+
+frame.groupby(frame['color'])['price1'].mean()
+
+
+# In[116]:
+
+
+(frame.groupby(frame['color']).mean())['price1']
+
+
+# In[117]:
+
+
+means = frame.groupby('color').mean().add_prefix('mean_')
+means
+
+
+# ### Functions on Groups
+
+# In[118]:
+
+
+group = frame.groupby('color')
+group['price1'].quantile(0.6)
+
+
+# In[119]:
+
+
+def range(series):
+    return series.max() - series.min()
+group['price1'].agg(range)
+
+
+# In[120]:
+
+
+group.agg(range)
+
+
+# In[121]:
+
+
+group['price1'].agg(['mean','std',range])
+
+
+# ## Advanced Data Aggregation
+
+# In[122]:
+
+
+frame = pd.DataFrame({ 'color': ['white','red','green','red','green'],
+                       'price1': [5.56, 4.20, 1.30, 0.56, 2.75],
+                       'price2': [4.75,4.12,1.60,0.75,3.15]})
+frame
+
+
+# In[123]:
+
+
+sums = frame.groupby('color').sum().add_prefix('tot_')
+sums
+
+
+# In[124]:
+
+
+pd.merge(frame, sums, left_on='color', right_index=True)
+
+
+# In[125]:
+
+
+frame.groupby('color').transform(np.sum).add_prefix('tot_')
+
+
+# In[126]:
+
+
+frame = pd.DataFrame({ 'color': ['white','black','white','white','black','black'],
+                       'status': ['up','up','down','down','down','up'],
+                       'price1': [12.33,14.55,22.34,27.84,23.40,18.33],
+                       'price2': [11.23,31.80,29.99,31.18,18.25,22.44]})
+frame
+
+
+# In[127]:
+
+
+frame.groupby(['color','status']).apply( lambda x: x.max())
+
+
+# In[128]:
+
+
+frame.rename(index=reindex, columns=recolumn)
+
+
+# In[129]:
+
+
+temp = pd.date_range('1/1/2015', periods=10, freq= 'H')
+temp
+
+
+# In[130]:
+
+
+timeseries = pd.Series(np.random.rand(10), index=temp)
+timeseries
+
+
+# In[131]:
+
+
+timetable = pd.DataFrame( {'date': temp, 'value1': np.random.rand(10),
+                                      'value2': np.random.rand(10)})
+timetable
+
+
+# In[132]:
+
+
+timetable['cat'] = ['up','down','left','left','up','up','down','right','right','up']
+timetable
+
