@@ -260,7 +260,7 @@ wideframe
 
 
 
-# ### Lecture 4.Removing, Mapping, Renaming Operations with Pandas
+# ### Lecture 4.Removing, Mapping Operations with Pandas
 
 import numpy as np
 import pandas as pd
@@ -288,7 +288,7 @@ frame1.drop('white')
 
 
 
-# ### Removing Duplicates
+# ### Removing Duplicate rows
 
 dframe = pd.DataFrame({ 'color': ['white','white','red','red','white'],
                         'value': [2,1,3,3,2]})
@@ -299,6 +299,9 @@ dframe.duplicated()
 
 
 dframe[dframe.duplicated()]
+
+
+dframe.drop_duplicates()
 
 
 # ### Replacing Values via Mapping
@@ -349,7 +352,40 @@ frame['price'] = frame['item'].map(price)
 frame
 
 
-# ### Rename the Indexes of the Axes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Lecture 5.Rename the Indexes of the Axes
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+frame = pd.DataFrame({'item':['ball','mug','pen','pencil','ashtray'],
+                      'color':['white','red','green','black','yellow'],
+                      'price':[5.56,4.2,1.3,0.56,2.75]})
+
 frame
 
 
@@ -365,7 +401,7 @@ frame.rename(reindex)
 
 recolumn = {
     'item': 'object',
-    'prince': 'value'
+    'price': 'value'
 }
 frame.rename(index=reindex, columns=recolumn)
 
@@ -401,11 +437,64 @@ frame
 
 
 
+# ### Lecture 6. Detecting and Filtering Outliers
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 
-# ## Discretization and Binning
+randframe = pd.DataFrame(np.random.randn(1000,3))
+randframe.describe()
 
-# In[60]:
+
+randframe.std()
+
+#show the outlier, if any column has outlier value
+randframe[(np.abs(randframe) > (3*randframe.std())).any(1)]
+
+
+#to get the data excluding outlier observations
+outindex= np.array(randframe[(np.abs(randframe) > (3 *randframe.std())).any(1)].index)
+outindex
+
+randframe.drop(outindex, inplace=True)
+
+len(randframe)
+
+
+
+#show the outlier observation, if one specified column has outlier
+randframe = pd.DataFrame(np.random.randn(1000,3))
+
+randframe[randframe[2] > 2.8 *randframe[2].std()]
+
+randframe[randframe[2] <= 2.8*randframe[2].std()]
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 7. Discretization and Binning of Datasets with Pandas
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
 
 
 results = [12,34,67,55,28,90,99,12,3,56,74,44,87,23,49,89,87]
@@ -414,94 +503,84 @@ cat = pd.cut(results, bins)
 cat
 
 
-# In[61]:
-
-
 cat.categories
-
-
-# In[62]:
 
 
 cat.codes
 
 
-# In[63]:
-
 
 pd.value_counts(cat)
 
-
-# In[64]:
 
 
 bin_names = ['unlikely','less likely','likely','highly likely']
 pd.cut(results, bins, labels=bin_names)
 
 
-# In[65]:
-
-
+# cut into 5 bins in equal interval
 pd.cut(results, 5)
 
 
-# In[66]:
 
-
+#qcut will make the number of occurrence in each bin equal
 quintiles = pd.qcut(results, 5)
 quintiles
-
-
-# In[67]:
 
 
 pd.value_counts(quintiles)
 
 
-# ### Detecting and Filtering Outliers
-
-# In[68]:
 
 
-randframe = pd.DataFrame(np.random.randn(1000,3))
-randframe.describe()
+#create a bin column for a dataframe
+df = pd.DataFrame({'number': np.random.randint(1, 100, 10)})
+df['bins'] = pd.cut(x=df['number'], bins=[1, 20, 40, 60, 80, 100],
+                    labels=['1', '2', '3', '4', '5'])
+
+print(df)
+ 
 
 
-# In[69]:
 
 
-randframe.std()
 
 
-# In[70]:
 
 
-randframe[(np.abs(randframe) > (3*randframe.std())).any(1)]
 
 
-# ## Permutation
-
-# In[71]:
 
 
+
+
+
+
+
+
+
+
+
+# ## Lecture 8. Permutation,Random Sampling with Pandas
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+#Permutation
 nframe = pd.DataFrame(np.arange(25).reshape(5,5))
 nframe
-
-
-# In[72]:
 
 
 new_order = np.random.permutation(5)
 new_order
 
 
-# In[73]:
-
-
 nframe.take(new_order)
-
-
-# In[74]:
 
 
 new_order = [3,4,2]
@@ -510,207 +589,49 @@ nframe.take(new_order)
 
 # ### Random Sampling
 
-# In[75]:
-
 
 sample = np.random.randint(0, len(nframe), size=3)
 sample
 
 
-# In[76]:
-
-
 nframe.take(sample)
 
 
-# ## String Manipulation
 
-# ### Built-in Methods for Manipulation of Strings
 
-# In[77]:
 
 
-text = '16 Bolton Avenue , Boston'
-text.split(',')
 
 
-# In[78]:
 
 
-tokens = [s.strip() for s in text.split(',')]
-tokens
 
 
-# In[79]:
 
 
-address, city = [s.strip() for s in text.split(',')]
-address
 
 
-# In[80]:
 
 
-city
 
 
-# In[81]:
 
 
-address + ',' + city
 
 
-# In[82]:
 
 
-strings = ['A+', 'A', 'A-', 'B', 'BB', 'BBB', 'C+']
-';'.join(strings)
 
+# ## Lecture 9.Data Aggregation and Grouping with Pandas
 
-# In[83]:
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
-
-'Boston' in text
-
-
-# In[84]:
-
-
-text.index('Boston')
-
-
-# In[85]:
-
-
-text.find('Boston')
-
-
-# In[86]:
-
-
-text.index('New York')
-
-
-# In[ ]:
-
-
-text.find('New York')
-
-
-# In[ ]:
-
-
-text.count('e')
-
-
-# In[ ]:
-
-
-text.count('Avenue')
-
-
-# In[87]:
-
-
-text.replace('Avenue','Street')
-
-
-# In[88]:
-
-
-text.replace('1','')
-
-
-# ### Regular Expressions
-
-# In[89]:
-
-
-import re
-
-
-# In[90]:
-
-
-text = "This is      an\t odd   \n text!"
-re.split('\s+', text)
-
-
-# In[91]:
-
-
-regex = re.compile('\s+')
-
-
-# In[92]:
-
-
-regex.split(text)
-
-
-# In[93]:
-
-
-text = 'This is my address: 16 Bolton Avenue, Boston'
-re.findall('A\w+', text)
-
-
-# In[94]:
-
-
-re.findall('[A,a]\w+', text)
-
-
-# In[95]:
-
-
-re.search('[A,a]\w+', text)
-
-
-# In[96]:
-
-
-search = re.search('[A,a]\w+', text)
-search.start()
-
-
-# In[97]:
-
-
-search.end()
-
-
-# In[98]:
-
-
-text[search.start():search.end()]
-
-
-# In[99]:
-
-
-re.match('[A,a]\w+', text)
-
-
-# In[100]:
-
-
-re.match('T\w+', text)
-
-
-# In[101]:
-
-
-match = re.match('T\w+', text)
-text[match.start():match.end()]
-
-
-# ## Data Aggregation
-
-# ### A Practical Example
-
-# In[102]:
-
+#Data aggregation
 
 frame = pd.DataFrame({ 'color': ['white','red','green','red','green'],
                        'object': ['pen','pencil','pencil','ashtray','pen'],
@@ -719,26 +640,14 @@ frame = pd.DataFrame({ 'color': ['white','red','green','red','green'],
 frame
 
 
-# In[103]:
-
-
 group = frame['price1'].groupby(frame['color'])
 group
-
-
-# In[104]:
 
 
 group.groups
 
 
-# In[105]:
-
-
 group.mean()
-
-
-# In[106]:
 
 
 group.sum()
@@ -746,26 +655,14 @@ group.sum()
 
 # ### Hierarchical Grouping
 
-# In[107]:
-
-
 ggroup = frame['price1'].groupby([frame['color'],frame['object']])
 ggroup.groups
-
-
-# In[108]:
 
 
 ggroup.sum()
 
 
-# In[109]:
-
-
 frame[['price1','price2']].groupby(frame['color']).mean()
-
-
-# In[110]:
 
 
 frame.groupby(frame['color']).mean()
@@ -773,49 +670,28 @@ frame.groupby(frame['color']).mean()
 
 # ## Group Iteration
 
-# In[111]:
-
-
 for name, group in frame.groupby('color'):
     print(name)
     print(group)
 
 
 # ### Chain of Transformations
-
-# In[112]:
-
-
 result1 = frame['price1'].groupby(frame['color']).mean()
 type(result1)
-
-
-# In[113]:
 
 
 result2 = frame.groupby(frame['color']).mean()
 type(result2)
 
 
-# In[114]:
-
 
 frame['price1'].groupby(frame['color']).mean()
-
-
-# In[115]:
 
 
 frame.groupby(frame['color'])['price1'].mean()
 
 
-# In[116]:
-
-
 (frame.groupby(frame['color']).mean())['price1']
-
-
-# In[117]:
 
 
 means = frame.groupby('color').mean().add_prefix('mean_')
@@ -824,14 +700,8 @@ means
 
 # ### Functions on Groups
 
-# In[118]:
-
-
 group = frame.groupby('color')
 group['price1'].quantile(0.6)
-
-
-# In[119]:
 
 
 def range(series):
@@ -839,95 +709,9 @@ def range(series):
 group['price1'].agg(range)
 
 
-# In[120]:
-
-
 group.agg(range)
-
-
-# In[121]:
 
 
 group['price1'].agg(['mean','std',range])
 
-
-# ## Advanced Data Aggregation
-
-# In[122]:
-
-
-frame = pd.DataFrame({ 'color': ['white','red','green','red','green'],
-                       'price1': [5.56, 4.20, 1.30, 0.56, 2.75],
-                       'price2': [4.75,4.12,1.60,0.75,3.15]})
-frame
-
-
-# In[123]:
-
-
-sums = frame.groupby('color').sum().add_prefix('tot_')
-sums
-
-
-# In[124]:
-
-
-pd.merge(frame, sums, left_on='color', right_index=True)
-
-
-# In[125]:
-
-
-frame.groupby('color').transform(np.sum).add_prefix('tot_')
-
-
-# In[126]:
-
-
-frame = pd.DataFrame({ 'color': ['white','black','white','white','black','black'],
-                       'status': ['up','up','down','down','down','up'],
-                       'price1': [12.33,14.55,22.34,27.84,23.40,18.33],
-                       'price2': [11.23,31.80,29.99,31.18,18.25,22.44]})
-frame
-
-
-# In[127]:
-
-
-frame.groupby(['color','status']).apply( lambda x: x.max())
-
-
-# In[128]:
-
-
-frame.rename(index=reindex, columns=recolumn)
-
-
-# In[129]:
-
-
-temp = pd.date_range('1/1/2015', periods=10, freq= 'H')
-temp
-
-
-# In[130]:
-
-
-timeseries = pd.Series(np.random.rand(10), index=temp)
-timeseries
-
-
-# In[131]:
-
-
-timetable = pd.DataFrame( {'date': temp, 'value1': np.random.rand(10),
-                                      'value2': np.random.rand(10)})
-timetable
-
-
-# In[132]:
-
-
-timetable['cat'] = ['up','down','left','left','up','up','down','right','right','up']
-timetable
 
