@@ -1,0 +1,1046 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 13 12:45:46 2022
+How to do data analysis with Python programming
+
+@author: https://www.youtube.com/@easydatascience2508
+"""
+
+
+#### Section 14. Data visualization with matplotlib
+
+## Lecture 1. Getting started using matplotlib
+
+import matplotlib.pyplot as plt
+
+#plot a line
+plt.plot([1,2,3,4])
+plt.show()
+
+
+# ## Set the properties of the plot
+
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+
+plt.show()
+
+
+#sett axis range and title
+
+plt.axis([0,5,0,20])
+plt.title('My first plot')
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+#plt.plot([1,2,3,4],[1,4,9,16])
+plt.show()
+
+# ### matplotlib and NumPy
+
+import math
+import numpy as np
+
+t = np.arange(0,2.5,0.1)
+y1 = np.sin(math.pi*t)
+y2 = np.sin(math.pi*t+math.pi/2)
+y3 = np.sin(math.pi*t-math.pi/2)
+plt.plot(t,y1,'b*',t,y2,'g^',t,y3,'ys')
+plt.show()
+
+
+# In[8]:
+plt.plot(t,y1,'b',t,y2,'g',t,y3,'r')
+plt.show()
+
+plt.plot(t,y1,'b--',t,y2,'g',t,y3,'r-.')
+plt.show()
+
+
+
+# ## Using the kwargs
+#The objects that make up a chart have many attributes that 
+#characterize them. These attributes are all default values, 
+#but can be set through the use of keyword args, often
+#referred as kwargs.
+
+#set thickness
+plt.plot([1,2,4,2,1,0,1,2,1,4], linewidth=2.0)
+plt.show()
+
+
+# ### Working with multiple Figures and Axes
+
+#matplotlib allows you to manage multiple figures simultaneously, 
+#and within each figure, it offers the ability to view different
+#plots defined as subplots
+
+#The argument of the subplot() function is composed of three integers.
+# The first number defines how many parts the figure is split
+#into vertically. The second number defines how many parts the 
+#figure is divided into horizontally. The third issue selects 
+#which is the current subplot on which you can direct commands.
+
+#plot sin and cos in two subplots vertically
+t = np.arange(0,5,0.1)
+y1 = np.sin(2*np.pi*t)
+y2 = np.sin(2*np.pi*t)
+plt.subplot(211)
+plt.plot(t,y1,'b-.')
+plt.subplot(212)
+plt.plot(t,y2,'r--')
+plt.show()
+
+
+#plot sin and cos in two subplots horizontally
+t = np.arange(0.,1.,0.05)
+y1 = np.sin(2*np.pi*t)
+y2 = np.cos(2*np.pi*t)
+plt.subplot(121)
+plt.plot(t,y1,'b-.')
+plt.subplot(122)
+plt.plot(t,y2,'r--')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### lecture 2. Adding text to charts in matplotlib
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
+# ### Adding text
+
+#add x,y axis labels
+plt.axis([0,5,0,20])
+plt.title('My first plot')
+plt.xlabel('Counting')
+plt.ylabel('Square values')
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.show()
+
+
+#modify the title by changing the font and increasing the size of 
+#the character, and modify the color of the axis labels
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.show()
+
+
+# text() allows you to add text to any position within a chart.
+#text(x,y,s, fontdict=None, **kwargs)
+#The first two arguments are the coordinates of the location 
+#where you want to place the text. s is the string of text to 
+#be added, and fontdict (optional) is the font that you
+#want to use. Finally, you can add the keywords.
+
+#Add the label to each point of the plot
+
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.show()
+
+
+# matplotlib offers the possibility to integrate LaTeX expressions
+#mostly usef for mathematical expressions.
+#To do this, you can add a LaTeX expression to the text, enclosing 
+#it between two $ characters. The interpreter will recognize them 
+#as LaTeX expressions and convert them to the corresponding graphic, 
+#which can be a mathematical expression, a formula,mathematical 
+#characters, or just Greek letters. Generally you have to precede 
+#the string containing LaTeX expressions with an r, which indicates
+# raw text, in order to avoid unintended escape sequences
+
+#add a formula describing the trend followed by the point 
+#of the plot and enclose it in a colored bounding box
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.text(1.1,12,r'$y = x^2$', fontsize=20, bbox={'facecolor':'yellow','alpha':0.2})         
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Lecture 3. Adding a grid in matplotlib
+#Grid lets you better understand the position occupied by 
+#each point on the chart
+
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
+
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.text(1.1,12,r'$y = x^2$', fontsize=20, bbox={'facecolor':'yellow','alpha':0.2})  
+plt.grid(True)
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.show()
+
+
+
+
+x = np.arange(-5, 5, 0.01)
+y = np.sin(2*np.pi*x)
+plt.plot(x, y)
+# Specify grid with line attributes
+plt.grid(color='r', linestyle='--')
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ### Lecture 4. Adding Legend to charts in matplotlib
+#Add a legend to your chart with the legend() function and a string
+#indicating the words with which you want the series to be shown
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
+#assign the First series name to the input data array
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.text(1.1,12,r'$y = x^2$', fontsize=20, bbox={'facecolor':'yellow','alpha':0.2})  
+plt.grid(True)
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+#A legend is added in the upper-right corner by default
+plt.legend(['First series'])
+plt.show()
+
+
+
+
+#the position occupied by the legend is set by assigning numbers 
+#from 0 to 10 to the loc kwarg. Each of these numbers characterizes 
+#one of the corners of the chart
+#0 best
+#1 upper-right
+#2 upper-left
+#3 lower-right
+#4 lower-left
+#5 right
+#6 center-left
+#7 center-right
+#8 lower-center
+#9 upper-center
+#10 center
+
+#move the legend in the upper-left corner
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.text(1.1,12,r'$y = x^2$', fontsize=20, bbox={'facecolor':'yellow','alpha':0.2})  
+plt.grid(True)
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.plot([1,2,3,4],[0.8,3.5,8,15],'g^')
+plt.plot([1,2,3,4],[0.5,2.5,4,12],'b*')
+plt.legend(['First series','Second series','Third series'], loc=2)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Lecture 5. Save your charts in matplotlib
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+# ### Saving your chart directly as an Image
+
+plt.axis([0,5,0,20])
+plt.title('My first plot', fontsize=20, fontname='Times New Roman')
+plt.xlabel('Counting', color='gray')
+plt.ylabel('Square values',color='gray')
+plt.text(1,1.5,'First')
+plt.text(2,4.5,'Second')
+plt.text(3,9.5,'Third')
+plt.text(4,16.5,'Fourth')
+plt.text(1.1,12,r'$y = x^2$', fontsize=20, bbox={'facecolor':'yellow','alpha':0.2})  
+plt.grid(True)
+plt.plot([1,2,3,4],[1,4,9,16],'ro')
+plt.plot([1,2,3,4],[0.8,3.5,8,15],'g^')
+plt.plot([1,2,3,4],[0.5,2.5,4,12],'b*')
+plt.legend(['First series','Second series','Third series'], loc=2)
+plt.savefig('my_chart.png')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 6. Handling Date Values of charts in matplotlib
+import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+
+#problematic showing date ticks on x-axis using default setting
+#for day-month-year
+events = [datetime.date(2015,1,23), 
+          datetime.date(2015,1,28),
+          datetime.date(2015,2,3),
+          datetime.date(2015,2,21),
+          datetime.date(2015,3,15),
+          datetime.date(2015,3,24),
+          datetime.date(2015,4,8),
+          datetime.date(2015,4,24)]
+readings = [12,22,25,20,18,15,17,14]
+plt.plot(events,readings)
+plt.show()
+
+
+
+#To manage dates it is therefore advisable to define a time scale 
+#with appropriate  objects. First you need to import matplotlib.dates,
+#a module specialized for this type of data. Then you define the 
+#scales of the times, as in this case, a scale of days and one of
+#the months, through the MonthLocator() and DayLocator() functions. 
+#In these cases, the formatting is also very important, and to avoid 
+#overlap or unnecessary references,you have to limit the tick labels 
+#to the essential, which in this case is year-month. This format 
+#can be passed as an argument to the DateFormatter() function. After
+#you defined the two scales, one for the days and one for the months, 
+#you can set two different kinds of ticks on the x-axis, using the 
+#set_major_locator() and set_minor_locator() functions on the 
+#xaxis object. To set the text format of the tick labels referred 
+#to the months you have to use the set_major_formatter() function.
+
+
+import matplotlib.dates as mdates
+
+months = mdates.MonthLocator()
+days = mdates.DayLocator()
+timeFmt = mdates.DateFormatter('%Y-%m')
+events = [datetime.date(2015,1,23), 
+          datetime.date(2015,1,28),
+          datetime.date(2015,2,3),
+          datetime.date(2015,2,21),
+          datetime.date(2015,3,15),
+          datetime.date(2015,3,24),
+          datetime.date(2015,4,8),
+          datetime.date(2015,4,24)]
+readings = [12,22,25,20,18,15,17,14]
+fig, ax = plt.subplots()
+plt.plot(events, readings)
+ax.xaxis.set_major_locator(months)
+ax.xaxis.set_major_formatter(timeFmt)
+ax.xaxis.set_minor_locator(days)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Line charts with matplotlib
+import datetime
+import numpy as np
+import matplotlib.pyplot as plt
+
+#A mathematical function represented in a line chart
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+plt.plot(x,y)
+plt.show()
+
+
+
+#display a family of functions:
+#a different color is automatically assigned to each line.
+#All the plots are represented on the same scale; #that is, the data
+#points of each series refer to the same x-axis and y-axis.
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+y2 = np.sin(2*x)/x
+y3 = np.sin(x)/x
+plt.plot(x,y)
+plt.plot(x,y2)
+plt.plot(x,y3)
+plt.show()
+
+
+
+#specify color and styles for lines
+
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+y2 = np.sin(2*x)/x
+y3 = np.sin(x)/x
+plt.plot(x,y,'k--',linewidth=3)
+plt.plot(x,y2,'m-.')
+plt.plot(x,y3,color='#87a3cc',linestyle='--')
+plt.show()
+
+
+##Using tick labels in LaTeX format
+
+#by default, values on ticks are shown in numerical form. 
+#you replace the numerical values with multiple of π. 
+#You can also replace the ticks on the y-axis. 
+#To do all this, you have to use xticks() and yticks() functions.
+#passing to each of them two lists of values. 
+#The first list contains values corresponding to the positions 
+#where the ticks are to be placed,and the second contains the 
+#tick labels. 
+#you can use strings containing LaTeX format in order to correctly 
+#display the symbol π. 
+#For LaTex, you need to define them within two $ characters 
+#and to add a r as the prefix.
+
+
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+y2 = np.sin(2*x)/x
+y3 = np.sin(x)/x
+plt.plot(x,y,color='b')
+plt.plot(x,y2,color='r')
+plt.plot(x,y3,color='g')
+plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],
+           [r'$-2\pi$',r'$-\pi$',r'$0$',r'$+\pi$',r'$+2\pi$'])
+plt.yticks([-1,0,1,2,3],
+           [r'$-1$',r'$0$',r'$+1$',r'$+2$',r'$+3$'])
+plt.show()
+
+
+
+#to have the two axes passing through the origin (0, 0)
+#the two axes crossing in the middle of the figure
+
+#To do this, you must first capture the Axes object through the 
+#gca() function. Then through this object, you can select each of 
+#the four sides making up the bounding box,specifying for each one 
+#its position: right, left, bottom, and top. Crop the sides that 
+#do not match any axis (right and top) using the set_color() 
+#function and indicating none for color
+
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+y2 = np.sin(2*x)/x
+y3 = np.sin(x)/x
+plt.plot(x,y,color='b')
+plt.plot(x,y2,color='r')
+plt.plot(x,y3,color='g')
+plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],
+           [r'$-2\pi$',r'$-\pi$',r'$0$',r'$+\pi$',r'$+2\pi$'])
+plt.yticks([-1,0,1,2,3],
+           [r'$-1$',r'$0$',r'$+1$',r'$+2$',r'$+3$'])
+ax = plt.gca()
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+#representing the x-axis
+ax.xaxis.set_ticks_position('bottom')
+ax.spines['bottom'].set_position(('data',0))
+#representing the y_axis
+ax.yaxis.set_ticks_position('left')
+ax.spines['left'].set_position(('data',0))
+plt.show()
+
+
+
+#to specify a particular point of the line using a notation 
+#and optionally add an arrow to better indicate the position
+#of the point
+
+#using function annotate(), 
+#The first argument is the string to be represented containing 
+#the expression in LaTeX; 
+#The point of the chart to note is indicated by a list containing 
+#the coordinates of the point [x, y]. 
+#The distance of the textual notation from the point to be highlighted 
+#is defined by the xytext kwarg, and represented by means of a curved 
+#arrow
+
+#get the chart with the mathematical notation of the limit
+
+x = np.arange(-2*np.pi,2*np.pi,0.01)
+y = np.sin(3*x)/x
+y2 = np.sin(2*x)/x
+y3 = np.sin(x)/x
+plt.plot(x,y,color='b')
+plt.plot(x,y2,color='r')
+plt.plot(x,y3,color='g')
+plt.xticks([-2*np.pi,-np.pi,0, np.pi, 2*np.pi],
+           [r'$-2\pi$',r'$-\pi$',r'$0$',r'$+\pi$',r'$+2\pi$'])
+plt.yticks([-1,0,1,2,3],
+           [r'$-1$',r'$0$',r'$+1$',r'$+2$',r'$+3$'])
+plt.annotate(r'$\lim_{x\to 0}\frac{\sin(x)}{x}= 1$', xy=[0,1],xycoords='data',
+             xytext=[30,30],fontsize=16, textcoords='offset points', arrowprops=dict(arrowstyle="->",
+             connectionstyle="arc3,rad=.2"))
+ax = plt.gca()
+ax.spines['right'].set_color('none')
+ax.spines['top'].set_color('none')
+ax.xaxis.set_ticks_position('bottom')
+ax.spines['bottom'].set_position(('data',0))
+ax.yaxis.set_ticks_position('left')
+ax.spines['left'].set_position(('data',0))
+plt.show()
+
+
+# ## Line Charts with pandas
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+data = {'series1':[1,3,4,3,5],
+        'series2':[2,4,5,2,4],
+        'series3':[3,2,3,1,3]}
+df = pd.DataFrame(data)
+x = np.arange(5)
+plt.axis([0,5,0,7])
+plt.plot(x,df)
+plt.legend(data, loc=2)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 8.Histograms using matplotlib in Python
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+#simple example
+# Creating dataset
+test = np.array([25, 57, 15, 93, 34,
+              73, 54, 54, 11,
+              20, 51, 52, 75, 31,
+              27, 39,29])
+ 
+# Creating histogram, setting the bin bounding
+fig, ax = plt.subplots(figsize =(12, 9))
+ax.hist(test, bins = [0, 20, 40, 60, 80, 100])
+ 
+# Show plot
+plt.show()
+
+
+
+#setting bin number
+test2 = np.random.randint(0,200,200)
+test2
+
+
+n, bin, patches = plt.hist(test2, bins=20)
+plt.show()
+
+n
+bin
+
+
+#Customization of Histogram
+#different color for different bins
+#adjust axis
+#add text
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import colors
+from matplotlib.ticker import PercentFormatter
+ 
+ 
+# Creating dataset
+np.random.seed(23685752)
+N_points = 10000
+n_bins = 20
+ 
+# Creating distribution
+x = np.random.randn(N_points)
+y = .8 ** x + np.random.randn(10000) + 25
+legend = ['distribution']
+
+# Creating histogram
+fig, axs = plt.subplots(1, 1,
+                        figsize =(10, 7),
+                        )
+ 
+ 
+# Remove axes splines
+for s in ['top', 'bottom', 'left', 'right']:
+    axs.spines[s].set_visible(False)
+ 
+# Remove x, y ticks
+axs.xaxis.set_ticks_position('none')
+axs.yaxis.set_ticks_position('none')
+   
+# Add padding between axes and labels
+axs.xaxis.set_tick_params(pad = 5)
+axs.yaxis.set_tick_params(pad = 10) 
+
+# Add x, y gridlines
+axs.grid(b = True, color ='grey',
+        linestyle ='-.', linewidth = 0.5,
+        alpha = 0.6)
+ 
+# Add Text watermark
+fig.text(0.9, 0.15, 'Jeeteshgavande30',
+         fontsize = 12,
+         color ='red',
+         ha ='right',
+         va ='bottom',
+         alpha = 0.7)
+
+# Creating histogram
+N, bins, patches = axs.hist(x, bins = n_bins)
+ 
+# Setting color
+fracs = ((N**(1 / 5)) / N.max())
+norm = colors.Normalize(fracs.min(), fracs.max())
+ 
+for thisfrac, thispatch in zip(fracs, patches):
+    color = plt.cm.viridis(norm(thisfrac))
+    thispatch.set_facecolor(color)
+ 
+# Adding extra features   
+plt.xlabel("X-axis")
+plt.ylabel("y-axis")
+plt.legend(legend)
+plt.title('Customized histogram')
+ 
+# Show plot
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 9. Bar Charts using matplotlib in Python
+
+import matplotlib.pyplot as plt
+# a simple bar chart in which indices are drawn on the x-axis
+index = [0,1,2,3,4]
+values = [5,7,3,4,6]
+plt.bar(index,values)
+plt.show()
+
+
+
+#specify the categories through the tick label
+#by passing a  list of strings to the xticks() function
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+index = np.arange(5)
+values1 = [5,7,3,4,6]
+plt.bar(index, values1)
+plt.xticks(index+0.4,['A','B','C','D','E'])
+plt.show()
+
+
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+#bar chart with error bar
+#refine the bar chart, adding standard deviations of each bar,through
+#the yerr kwarg along with a list containing the standard deviations
+
+index = np.arange(5)
+values1 = [5,7,3,4,6]
+std1 = [0.8,1,0.4,0.9,1.3]
+plt.title('A Bar Chart')
+plt.bar(index, values1, yerr=std1, error_kw={'ecolor':'0.1','capsize':6},alpha=0.7,label='First')
+plt.xticks(index+0.4,['A','B','C','D','E'])
+plt.legend(loc=2)
+plt.show()
+
+
+# ### Horizontal Bar Chart
+#barh(). The arguments and the kwargs valid for the bar() function 
+#remain the same for this function.The only change that the categories
+# are represented on the y-axis and the numerical values are
+#shown on the x-axis now
+import matplotlib.pyplot as plt
+import numpy as np
+
+index = np.arange(5)
+values1 = [5,7,3,4,6]
+std1 = [0.8,1,0.4,0.9,1.3]
+plt.title('A Horizontal Bar Chart')
+plt.barh(index, values1, xerr=std1, error_kw={'ecolor':'0.1','capsize':6},alpha=0.7,label='First')
+plt.yticks(index+0.4,['A','B','C','D','E'])
+plt.legend(loc=5)
+plt.show()
+
+
+# ### Multiserial Bar Chart
+#to define a sequence of indexes, each corresponding to a bar, 
+#to be assigned to the x-axis. These indices should represent
+# categories.
+import matplotlib.pyplot as plt
+import numpy as np
+
+index = np.arange(5)
+values1 = [5,7,3,4,6]
+values2 = [6,6,4,5,7]
+values3 = [5,6,5,4,6]
+bw = 0.3
+plt.axis([0,5,0,8])
+plt.title('A Multiseries Bar Chart', fontsize=20)
+plt.bar(index, values1, bw, color='b')
+plt.bar(index+bw, values2, bw, color='g')
+plt.bar(index+2*bw, values3, bw, color='r')
+plt.xticks(index+1.5*bw,['A','B','C','D','E'])
+plt.show()
+
+
+# Multiserial hotizontal Bar Chart
+#have to reverse the axis range value
+#using yticks
+import matplotlib.pyplot as plt
+import numpy as np
+
+index = np.arange(5)
+values1 = [5,7,3,4,6]
+values2 = [6,6,4,5,7]
+values3 = [5,6,5,4,6]
+bw = 0.3
+plt.axis([0,8,0,5])
+plt.title('A Multiseries Bar Chart', fontsize=20)
+plt.barh(index, values1, bw, color='b')
+plt.barh(index+bw, values2, bw, color='g')
+plt.barh(index+2*bw, values3, bw, color='r')
+plt.yticks(index+0.4,['A','B','C','D','E'])
+plt.show()
+
+
+# ### Multiseries Bar Chart with pandas DataFrame
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+index = np.arange(5)
+data = {'series1': [1,3,4,3,5],
+        'series2': [2,4,5,2,4],
+        'series3': [3,2,3,1,3]}
+df = pd.DataFrame(data)
+df.plot(kind='bar')
+plt.show()
+
+
+# Multiseries horizontal Bar Chart with pandas DataFrame
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+index = np.arange(5)
+data = {'series1': [1,3,4,3,5],
+        'series2': [2,4,5,2,4],
+        'series3': [3,2,3,1,3]}
+df = pd.DataFrame(data)
+df.plot(kind='barh')
+plt.show()
+
+
+# ### Multiseries Stacked Bar Charts
+
+# bars are stacked one on the other, by adding the bottom
+#kwarg to each bar() function, and Each series must be assigned 
+#to the corresponding bottom kwarg.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+series1 = np.array([3,4,5,3])
+series2 = np.array([1,2,2,5])
+series3 = np.array([2,3,3,4])
+index = np.arange(4)
+plt.axis([-0.5,3.5,0,15])
+plt.title('A Multiseries Stacked Bar Chart')
+plt.bar(index,series1,color='r')
+plt.bar(index,series2,color='b',bottom=series1)
+plt.bar(index,series3,color='g',bottom=(series2+series1))
+plt.xticks(index,['Jan18','Feb18','Mar18','Apr18'])
+plt.show()
+
+
+# Multiseries horizontal Stacked Bar Charts
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+series1 = np.array([3,4,5,3])
+series2 = np.array([1,2,2,5])
+series3 = np.array([2,3,3,4])
+index = np.arange(4)
+plt.axis([0,15,-0.5,3.5])
+plt.title('A Multiseries Horizontal Stacked Bar Chart')
+plt.barh(index,series1,color='r')
+plt.barh(index,series2,color='b',left=series1)
+plt.barh(index,series3,color='g',left=(series2+series1))
+plt.yticks(index,['Jan18','Feb18','Mar18','Apr18'])
+plt.show()
+
+
+# use hatches that allow you to fill the various bars with 
+#strokes drawn in a different way
+#To do this, you have first to set the color of the bar as white 
+#and then you have to use the hatch kwarg to define how the hatch 
+#is to be set. The various hatches have codes distinguishable 
+#among these characters (|, /, -, \, *, -) corresponding to the 
+#line style filling the bar. The more a symbol is replicated, 
+#the denser the lines forming the hatch will be. For example, 
+#/// is more dense than //, which is more dense than /
+import matplotlib.pyplot as plt
+import numpy as np
+
+series1 = np.array([3,4,5,3])
+series2 = np.array([1,2,2,5])
+series3 = np.array([2,3,3,4])
+index = np.arange(4)
+plt.axis([0,15,-0.5,3.5])
+plt.title('A Multiseries Horizontal Stacked Bar Chart')
+plt.barh(index,series1,color='w',hatch='xx')
+plt.barh(index,series2,color='w',hatch='///',left=series1)
+plt.barh(index,series3,color='w',hatch='\\\\\\',left=(series2+series1))
+plt.yticks(index,['Jan18','Feb18','Mar18','Apr18'])
+plt.show()
+
+
+# ### Stacked Bar Charts with pandas DataFrame
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = {'series1': [1,3,4,3,5],
+        'series2': [2,4,5,2,4],
+        'series3': [3,2,3,1,3]}
+df = pd.DataFrame(data)
+df.plot(kind='bar',stacked=True)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Lecture 10. Pie Charts using matplotlib in Python
+
+import matplotlib.pyplot as plt
+
+#colors kwarg let you define the sequence of the colors, 
+#labels kwarg will assign a list of strings 
+#containing the labels to be displayed in sequence
+#axis() function to draw the pie chart in a perfectly spherical way
+
+#a simple pie chart
+
+labels = ['Nokia','Samsung','Apple','Lumia']
+values = [10,30,45,15]
+colors = ['yellow','green','red','blue']
+plt.pie(values,labels=labels,colors=colors)
+plt.axis('equal')
+plt.show()
+
+
+# explode kwarg let you draw a slice extracted from the pie
+#add a title
+#startangle kwarg to adjust the angle of rotation of the pie
+
+
+import matplotlib.pyplot as plt
+
+labels = ['Nokia','Samsung','Apple','Lumia']
+values = [10,30,45,15]
+colors = ['yellow','green','red','blue']
+explode = [0.3,0,0,0]
+plt.title('A Pie Chart')
+plt.pie(values,labels=labels,colors=colors,explode=explode,startangle=180)
+plt.axis('equal')
+plt.show()
+
+
+# autopct kwarg adds to the center of each slice a text label 
+#showing the corresponding value.
+
+import matplotlib.pyplot as plt
+
+labels = ['Nokia','Samsung','Apple','Lumia']
+values = [10,30,45,15]
+colors = ['yellow','green','red','blue']
+explode = [0.3,0,0,0]
+plt.title('A Pie Chart')
+plt.pie(values,labels=labels,colors=colors,explode=explode,shadow=True,autopct='%1.1f%%',startangle=180)
+plt.axis('equal')
+plt.show()
+
+
+# ### Pie Charts with pandas DataFrame
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = {'series1': [1,3,4,3,5],
+        'series2': [2,4,5,2,4],
+        'series3': [3,2,3,1,3]}
+df = pd.DataFrame(data)
+df['series1'].plot(kind='pie', figsize=(6,6))
+plt.show()
+
+
+
+
+
+
+
