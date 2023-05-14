@@ -162,7 +162,303 @@ else:
 
 
 
+### Example 3. Concatenate Multiple CSV Files Into a DataFrame
+
+#We first get a list of the CSV files in our path; then, 
+#for each file in the path, we read the contents into its 
+#own dataframe; afterwards, we combine all dataframes into 
+#a single frame; finally, we print out the results to inspect.
+
+import os
+os.getcwd()    #gettinh current working directory
+#Setting new working directory
+work_path="d:\\Pythondemo"
+os.chdir(work_path)      #setting new working directory
+os.getcwd()
+
+
+import glob
+import pandas as pd
+
+
+# Load all txt files in path
+demofiles = glob.glob('.\\*.csv')
+demofiles      
+
+# Create a list of dataframe, one series per CSV
+full_list = []
+for file_name in demofiles:
+    df = pd.read_csv(file_name, index_col=None, header=None)
+    full_list.append(df)
+
+# Create combined frame out of list of individual frames
+full_frame = pd.concat(full_list, axis=0, ignore_index=True)
+
+print(full_frame)
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+
+### Example 4. Zip & Unzip Files with Pandas
+import os
+os.getcwd()    #gettinh current working directory
+#Setting new working directory
+work_path="d:\\Pythondemo"
+os.chdir(work_path)      #setting new working directory
+os.getcwd()
+import pandas as pd
+
+# Create a dataframe
+df = pd.DataFrame({'object': ['ball', 'pen', 'paper'],
+	           'price': ['10', '5', '2'],
+		   'color': ['blue', 'green', 'white']})
+
+# Compress and save dataframe to file
+df.to_csv('savedfile.csv.zip', index=False, compression='zip')
+print('Dataframe compressed and saved to file')
+
+# Read compressed zip file into dataframe
+df_unzipped = pd.read_csv('savedfile.csv.zip',)
+print(df_unzipped)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Example 5. Merge two lists into a dictionary
+
+listA = ['Wilson', 'Dudu', 'Mico', 'Miaomiao', 'Wilson']
+listB = [32, 20, 7, 10, 69]
+
+#There are 3 ways to convert these two lists into a dictionary
+
+#1- Using Python's zip, dict functionz
+dict_1 = dict(zip(listA, listB))
+
+dict_1
+
+#2- Using the zip function with dictionary comprehensions
+dict_2 = {key:value for key, value in zip(listA, listB)}
+
+dict_2
+
+#3- Using the zip function with a loop
+items_tuples = zip(listA, listB) 
+dict_3 = {} 
+for key, value in items_tuples: 
+    if key in dict_3: 
+        pass # To avoid repeating keys.
+    else: 
+        dict_3[key] = value
+
+dict_3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Example 6. Merge two or more lists into a list of lists
+
+#task is when we have two or more lists, and we want to collect 
+#them all in one big list of lists, where all the first element (list)
+#in the resulting list come from all the first elements from input
+#lists, and so on. 
+
+#For example, if I have 4 lists [1,2,3], [‘a’,’b’,’c’], [‘h’,’e’,’y’] 
+#and [4,5,6] ,and we want to make a new list of those four lists; 
+#it will be [[1,’a’,’h’,4], [2,’b’,’e’,5], [3,’c’,’y’,6]].
+
+
+
+def merge(*args, missing_val = None):
+    """missing_val will be used when one of the smaller lists is 
+       shorter than the others.
+       Get the maximum length within the smaller lists."""
+    
+    max_length = max([len(lst) for lst in args])
+    outList = []
+    for i in range(max_length):
+        result = []
+        for k in range(len(args)):
+            if i < len(args[k]):
+                result.append(args[k][i])
+            else:
+                result.append(missing_val)
+        outList.append(result)
+ 
+    return outList
+
+
+testlistA = ["Wilson", "Dudu", "Maomao", "Miaomiao", "Mico", "Mia"]
+testlistB = [32, 20, 22, 10, 7]
+
+testlistC = merge(testlistA, testlistB)
+
+testlistC
+
+
+
+#Alternative code, more concise, for more experienced people
+def merge(*args, missing_val = None):
+    """ missing_val will be used when one of the smaller lists is shorter tham the others.
+        Get the maximum length within the smaller lists."""
+    max_length = max([len(lst) for lst in args])
+    outList = []
+    for i in range(max_length):
+        result = []
+        result.append([args[k][i] if i < len(args[k]) else missing_val for k in range(len(args))])
+        outList.append(result)
+    
+    return outList
+
+
+
+# use zip, result is list of tupoes, and length is the length of 
+#the shortest input list
+list(zip(testlistA, testlistB))
+
+
+
+
+
+
+
+
+
+
+
+
+### Example 7. Sort a list of dictionaries
+
+dicts_lists = [
+  {
+    "Name": "Wilson",
+    "Age": 32,
+  },
+  {
+     "Name": "Dudu",
+     "Age": 20,
+  },
+  {
+    "Name": "Maomao",
+    "Age": 22,
+  }
+]
+
+#There are different ways to sort that list
+#1- Using the sort/ sorted function based on the age
+#using dictionary's get method
+dicts_lists.sort(key=lambda item: item.get("Age"))
+
+dicts_lists
+
+#2- Using itemgetter module based on name
+from operator import itemgetter
+
+dicts_lists = [
+  {
+    "Name": "Wilson",
+    "Age": 32,
+  },
+  {
+     "Name": "Dudu",
+     "Age": 20,
+  },
+  {
+    "Name": "Maomao",
+    "Age": 22,
+  }
+]
+
+sortkey = itemgetter('Name')
+dicts_lists.sort(key=sortkey)
+
+dicts_lists
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Example 8. Sort a list based on another list
+
+a = ['Wilson', 'Dudu', 'Maomao', 'Mico', 'MiaoMiao', 'Mia']
+b = [32, 12, 25, 41, 18,69]
+
+#simplest method
+[x for _, x in sorted(zip(b, a))]
+
+#Use list comprehensions to sort these lists
+#zip the two lists.
+#create a new, sorted list based on the zip using sorted().
+#using a list comprehension extract the first elements of each pair from the sorted, zipped list.
+
+sortedList =  [val for (_, val) in sorted(zip(b, a), key=lambda x: \
+          x[0])]
+
+
+sortedList
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

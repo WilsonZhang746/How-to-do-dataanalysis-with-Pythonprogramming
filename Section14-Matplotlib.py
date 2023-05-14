@@ -1044,3 +1044,95 @@ plt.show()
 
 
 
+
+
+
+
+
+
+
+
+
+
+### Lecture 11. Google Map using gmplot package
+
+import gmplot
+
+
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+# First two arugments are the geogrphical coordinates .i.e. Latitude and Longitude
+#and the zoom resolution.
+
+#Molde, Norway
+#Note − Above screen display we see this because Google Maps 
+#service is not free now in case you are accessing through an API.
+# You need to add your API_KEY to see a better google map view. 
+# Below is the code to accomplish this −
+#gmap.apikey = "AIzaSyDeRNMnZ__VnQDiATiuz4kPjF_c9r1kWe8"
+
+gmap1 = gmplot.GoogleMapPlotter(62.7426017,7.0121223, 18 )
+
+#AALesund, Norway  
+gmap2 = gmplot.GoogleMapPlotter(62.4681223,6.0766385,18)
+
+#Oslo, Norway
+gmap3 = gmplot.GoogleMapPlotter(59.8937879,10.4554652,18)
+
+# Pass the path, to save
+gmap1.draw( ".\\map11.html" )
+gmap2.draw( ".\\map12.html" )
+gmap3.draw( ".\\map13.html" )
+
+
+
+#Scatter points on the google map and draw a line in between them .
+# import gmplot package
+import gmplot
+  
+latitude_list = [ 62.7426017, 62.4681223,59.8937879 ]
+longitude_list = [7.0121223, 6.0766385,10.4554652 ]
+  
+gmap4 = gmplot.GoogleMapPlotter(59.8937879,10.4554652,13)
+  
+# scatter method of map object 
+# scatter points on the google map
+gmap4.scatter( latitude_list, longitude_list, '# FF0000',
+                              size = 40, marker = False )
+  
+# Plot method Draw a line in
+# between given coordinates
+gmap4.plot(latitude_list, longitude_list,
+            edge_width = 2.5)
+  
+gmap4.draw( ".\\map14.html" )
+
+
+
+#To draw a polygon on the google map
+
+# import gmplot package
+import gmplot
+  
+latitude_list = [ 62.7426017, 62.4681223,59.8937879 ]
+longitude_list = [7.0121223, 6.0766385,10.4554652 ]
+  
+gmap5 = gmplot.GoogleMapPlotter(59.8937879,10.4554652,13)
+  
+gmap5.scatter( latitude_list, longitude_list, '# FF0000',
+                                size = 40, marker = False)
+  
+# polygon method Draw a polygon with
+# the help of coordinates
+gmap5.polygon(latitude_list, longitude_list,
+                   color = 'cornflowerblue')
+  
+gmap5.draw( ".\\map15.html" )
+
+
+
+
+
+

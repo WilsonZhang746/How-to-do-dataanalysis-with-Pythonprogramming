@@ -27,6 +27,16 @@ greet_user('jesse')
 
 
 
+
+
+
+
+
+
+
+
+
+
 ##Lecture 2.  Passing arguments to function
 #Example of pets type and its name
 def describe_pet(animal_type, pet_name):
@@ -41,7 +51,6 @@ describe_pet('dog', 'willie')
 #Keyword Arguments
 describe_pet(animal_type='hamster', pet_name='harry')
 describe_pet(pet_name='harry', animal_type='hamster')
-
 
 
 #Default Values
@@ -64,6 +73,13 @@ describe_pet(pet_name='willie')
 describe_pet('harry', 'hamster')
 describe_pet(pet_name='harry', animal_type='hamster')
 describe_pet(animal_type='hamster', pet_name='harry')
+
+
+
+
+
+
+
 
 
 
@@ -115,6 +131,15 @@ print(musician)
 
 
 
+
+
+
+
+
+
+
+
+
 ##Lecture 4. Functions: Return a Dictionary
 #returns a dictionary representing a person
 def build_person(first_name, last_name):
@@ -144,6 +169,14 @@ print(musician)
 
 
 
+
+
+
+
+
+
+
+
 ##Lecture 5. Using a Function with a while Loop
 def get_formatted_name(first_name, last_name):
     """Return a full name, neatly formatted."""
@@ -163,6 +196,12 @@ while True:
     formatted_name = get_formatted_name(f_name, l_name)
     print("\nHello, " + formatted_name + "!")
     
+
+
+
+
+
+
 
 
 
@@ -245,6 +284,11 @@ unprinted_designs      #not modified
 
 
 
+
+
+
+
+
 #Lecture 7. Passing an arbitrary number of arguments to function
 #Passing an Arbitrary Number of Arguments to Function
 def make_pizza(*toppings):
@@ -300,11 +344,25 @@ print(user_profile)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 ##Lecture 8. Storing Your Functions in Modules
 #Importing an Entire Module
 #A module file pizza.py, saved in the same directory as this 
 #source file in your computer.
-
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 #Now we can import the module pizza we just created and 
 #then makes two calls to make_pizza():      
@@ -355,6 +413,62 @@ make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
 
 
 
+### Lecture 9. Map() function
+
+# Return double of n
+def summation(n):
+    return n + n
+ 
+# We double all numbers using map()
+numbers = (1, 2, 3, 4)
+result = map(summation, numbers)
+print(list(result))
+
+
+# Double all numbers using map and lambda
+ 
+numbers = (1, 2, 3, 4)
+result = map(lambda x: x + x, numbers)
+print(list(result))
+
+
+
+# Add two lists using map and lambda
+ 
+numbers1 = [1, 2, 3]
+numbers2 = [4, 5, 6]
+ 
+result = map(lambda x, y: x + y, numbers1, numbers2)
+print(list(result))
+
+
+
+# List of strings
+lst = ['sat', 'bat', 'cat', 'mat']
+ 
+# map() can listify the list of strings individually
+test = list(map(list, lst))
+print(test)
+
+
+
+
+# Define a function that doubles even numbers and leaves odd 
+#numbers as is
+def double_even(num):
+    if num % 2 == 0:
+        return num * 2
+    else:
+        return num
+ 
+# Create a list of numbers to apply the function to
+numbers = [1, 2, 3, 4, 5]
+ 
+# Use map to apply the function to each element in the list
+result = list(map(double_even, numbers))
+ 
+# Print the result
+print(result)  # [1, 4, 3, 8, 5]
 
 
 
@@ -364,6 +478,74 @@ make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
 
 
 
+
+
+
+
+
+
+
+
+### Lecture 10. Lambda function
+
+# A simple regular user-defined function, and its lambda function
+#alternative
+
+def f_square(x):
+    return x**2
+
+f_square(10)
+
+
+lambda x: x**2
+
+(lambda x: x**2)(10)
+
+result= lambda x: x**2
+
+result(10)
+
+
+#A lambda function which contains simple conditional test.
+calc = lambda num: "Odd number" if num % 2 != 0 else "Even number"
+ 
+print(calc(20))
+print(calc(19))
+
+
+
+# Invoking lambda return value to perform various operations
+concate = lambda s: ''.join([char for char in s if not char.isdigit()])
+print("filter_nums():", concate("Wilson32"))
+ 
+do_exclaim = lambda s: s + '!'
+print("do_exclaim():", do_exclaim("I like programming"))
+ 
+find_sum = lambda n: sum([int(x) for x in str(n)])
+print("find_sum():", find_sum(301301))
+
+
+
+
+#The lambda function gets more helpful when used inside a function.
+#We can use lambda function inside map(), filter(), sorted() 
+#and many other functions.
+
+lst = ["23", "32", "56", "0", "-3", "-18"]
+# sort list[str] numerically using sorted()
+# and custom sorting key using lambda
+print("Sorted numerically:",
+      sorted(lst, key=lambda x: int(x)))
+ 
+# filter positive even numbers
+# using filter() and lambda function
+print("Positive even numbers have been excluded:",
+      list(filter(lambda x: not (int(x) % 2 == 0 and int(x) > 0), lst)))
+ 
+# added 10 to each item after type and
+# casting to int, then convert items to string again
+print("Operation on each item using lambda and map()",
+      list(map(lambda x: str(int(x) + 10), lst)))
 
 
 
