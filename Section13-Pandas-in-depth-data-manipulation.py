@@ -79,7 +79,8 @@ pd.merge(frame1,frame2,right_index=True, left_index=True)
 pd.merge(frame1,frame2,right_index=True, left_index=True, how='outer')
 
 
-frame1.join(frame2)
+frame1.join(frame2)     #error
+
 
 
 
@@ -713,5 +714,98 @@ group.agg(range)
 
 
 group['price1'].agg(['mean','std',range])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 10.  Reshape Wide long form pandas dataframe
+### using stack,unstack and melt method
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
+
+
+## stack() - from dataframe to Series
+# ### Pivoting from a dataframe to Series with Hierarchical Indexing
+
+frame1 = pd.DataFrame(np.arange(9).reshape(3,3),
+                     index=['white','black','red'],
+                     columns=['ball','pen','pencil'])
+frame1
+
+
+ser = frame1.stack()
+ser
+
+
+
+### unstack() - from Series to dataframe
+## to return as a dataframe
+
+ser.unstack()
+
+
+ser.unstack(0)
+
+
+# ### Pivoting - from "Long" to "Wide" Format
+
+longframe = pd.DataFrame({ 'color':['white','white','white',
+                                    'red','red','red',
+                                    'black','black','black'],
+                           'item':['ball','pen','mug',
+                                   'ball','pen','mug',
+                                   'ball','pen','mug'],
+                           'value': np.random.rand(9)})
+longframe
+
+
+wideframe = longframe.pivot('color','item')
+wideframe
+
+wideframe.reset_index(inplace = True)
+wideframe
+
+
+# melt()  - from wide format to long form
+frame = pd.DataFrame({'item':['ball','mug','pen','pencil','ashtray'],
+                      'color':['white','red','green','black','yellow'],
+                      'size' : ['large','medium','small','big','small'],
+                      'price':[5.56,4.2,1.3,0.56,2.75]})
+
+frame
+
+df_melt = frame.melt(id_vars =['item', 'color']) 
+
+df_melt
+
+
+wideframe = df_melt.pivot(index=['item','color'], columns='variable')
+wideframe
+
+
+wideframe.reset_index(inplace = True)
+
+wideframe
+
+
+
 
 
