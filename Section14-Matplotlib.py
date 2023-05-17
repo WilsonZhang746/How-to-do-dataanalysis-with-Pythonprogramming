@@ -1136,3 +1136,111 @@ gmap5.draw( ".\\map15.html" )
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 12. Google Map using folium package
+
+#1 : To create a Base Map.
+# import folium package
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path) 
+
+
+# to install folium package, run the following in Anaconda prompt window:
+# "pip install folium" 
+import folium
+ 
+# plot a base googlemap of Molde Football Stadium
+# and starting Zoom level = 12
+#find the coordinates from googlemap
+my_map1 = folium.Map(location = [62.7330259, 7.1452503],
+                                        zoom_start = 12 )
+ 
+# save method of Map object will create a map
+my_map1.save(" my_map1.html " ) 
+
+
+
+
+#2 : Add a circular marker
+import folium
+ 
+my_map2 = folium.Map(location = [62.7330259,7.1452503],
+                                         zoom_start = 12)
+ 
+# CircleMarker with radius
+folium.CircleMarker(location = [62.7330259,7.1452503],
+                    radius = 50, popup = ' Molde Aker Stadium ').add_to(my_map2)
+ 
+# save as html
+my_map2.save(" my_map2.html ")
+
+
+
+#3 : Add a simple_marker for parachute style marker with pop-up text. 
+# import folium package
+import folium
+ 
+my_map3 = folium.Map(location = [62.7330259,7.1452503],
+                                        zoom_start = 15)
+ 
+# Pass a string in popup parameter
+folium.Marker([62.7330259,7.1452503],
+               popup = ' Molde Aker Stadium ').add_to(my_map3)
+ 
+ 
+my_map3.save(" my_map3.html ")
+
+
+
+
+
+
+#4 : Add a line to the map
+import folium
+ 
+my_map4 = folium.Map(location = [62.7330259,7.1452503],
+                                        zoom_start = 12)
+ 
+folium.Marker([62.7330259,7.1452503],
+              popup = 'Molde Aker Stadium').add_to(my_map4)
+ 
+folium.Marker([62.4701708,6.1854081],
+              popup = 'AAlesund Colorline Stadium').add_to(my_map4)
+ 
+# Add a line to the map by using line method .
+# it connect both coordinates by the line
+# line_opacity implies intensity of the line
+ 
+folium.PolyLine(locations = [(62.7330259,7.1452503), (62.4701708,6.1854081)],
+                line_opacity = 0.5).add_to(my_map4)
+ 
+my_map4.save("my_map4.html")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
