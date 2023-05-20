@@ -1243,4 +1243,133 @@ my_map4.save("my_map4.html")
 
 
 
+### Lecture 13. Donut charts
+
+#Creating a Simple Donut Chart
+#Create a Pie Chart
+#Draw a circle of suitable dimensions.
+#Add circle at the Center of Pie chart
+
+import matplotlib.pyplot as plt
+ 
+# Setting labels for items in Chart
+Familymember = ['Wilson', 'Dudu', 'Maomao',
+            'Miaomiao', 'Mico', 'Mia']
+ 
+# Setting size in Chart based on
+# given values
+Income = [32000, 20000, 22000, 10000, 8000, 3000]
+ 
+# colors
+colors = ['#FF0000', '#0000FF', '#FFFF00',
+          '#ADFF2F', '#FFA500','#FF00FF',]
+# explosion
+explode = (0.05, 0.05, 0.05, 0.05, 0.05, 0.05)
+
+
+# Pie Chart
+plt.pie(Income, colors=colors, labels=Familymember,
+        autopct='%1.1f%%', pctdistance=0.85,
+        explode=explode)
+ 
+# draw circle
+centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+#gcf() : get current figure
+fig = plt.gcf()
+ 
+# Adding Circle in Pie chart
+#gca() : get current axes
+fig.gca().add_artist(centre_circle)
+ 
+# Adding Title of chart
+plt.title('Employee Salary Details')
+ 
+# Displaying Chart
+plt.show()
+
+
+
+
+#Customizing the Donut Chart
+#Adding Legends to the Donut Chart 
+
+import matplotlib.pyplot as plt
+ 
+ 
+# Setting size in Chart based on
+# given values
+Income = [32000, 20000, 22000, 10000, 8000, 3000]
+ 
+# Setting labels for items in Chart
+Familymember = ['Wilson', 'Dudu', 'Maomao',
+            'Miaomiao', 'Mico', 'Mia']
+ 
+# colors
+colors = ['#FF0000', '#0000FF', '#FFFF00',
+          '#ADFF2F', '#FFA500','#FF00FF',]
+ 
+# explosion
+explode = (0.05, 0.05, 0.05, 0.05, 0.05,0.05)
+
+
+# Pie Chart
+plt.pie(Income, colors=colors, labels=Familymember,
+        autopct='%1.1f%%', pctdistance=0.85,
+        explode=explode)
+ 
+# draw circle
+centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+fig = plt.gcf()        #get the current figure
+ 
+# Adding Circle in Pie chart
+#gca() to get the current axes
+fig.gca().add_artist(centre_circle)
+
+
+# Adding Title of chart
+plt.title('Family Member Income')
+ 
+# Add Legends
+plt.legend(Familymember, loc="upper right", title="Member Color")
+ 
+# Displaying Chart
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
