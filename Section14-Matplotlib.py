@@ -1356,6 +1356,137 @@ plt.show()
 
 
 
+### Lecture 14. Stack plot
+
+#example 1. Family income
+import matplotlib.pyplot as plt
+ 
+# List of family member
+Familymember = ['Wilson', 'Dudu', 'Maomao', 'Miaomiao', 'Mico', 'Mia']
+ 
+# Income list
+Salary = [7, 8, 6, 11, 7,5]
+ 
+# Allowance list
+Allowance =  [8, 5, 7, 8, 13,4]
+ 
+# Stackplot with X, Y, colors value
+plt.stackplot(Familymember, Salary, Allowance,
+              colors =['r', 'c'])
+ 
+# X label
+plt.xlabel('Familymember')
+ 
+# Y label
+plt.ylabel('Income')
+ 
+# Title of Graph
+plt.title('Income of Salary and Allowance')
+ 
+# Displaying Graph
+plt.show()
+
+
+## example 2. patients cases
+import matplotlib.pyplot as plt
+ 
+# List of 7-days
+days = [x for x in range(0, 7)]
+ 
+# List of Suspected cases
+Suspected = [12, 18, 35, 50, 72, 90, 100]
+ 
+# List of Cured Cases
+Cured = [4, 8, 15, 22, 41, 55, 62]
+ 
+# List of Number of deaths
+Deaths = [1, 3, 5, 7, 9, 11, 13]
+ 
+# Plot x-labels, y-label and data
+plt.plot([], [], color ='blue',
+         label ='Suspected')
+plt.plot([], [], color ='orange',
+         label ='Cured')
+plt.plot([], [], color ='brown',
+         label ='Deaths')
+ 
+# Implementing stackplot on data
+plt.stackplot(days, Suspected, Cured,
+              Deaths, baseline ='zero',
+              colors =['blue', 'orange',
+                       'brown'])
+ 
+plt.legend()
+ 
+plt.title('No of Cases')
+plt.xlabel('Day of the week')
+plt.ylabel('Overall cases')
+ 
+plt.show()
+
+
+
+
+## example 3. Patient cases, value of baseline is set to sym 
+import matplotlib.pyplot as plt
+ 
+# List of 7-days
+days = [x for x in range(0, 7)]
+ 
+# List of Suspected cases
+Suspected = [12, 18, 35, 50, 72, 90, 100]
+ 
+# List of Cured Cases
+Cured = [4, 8, 15, 22, 41, 55, 62]
+ 
+# List of Number of deaths
+Deaths = [1, 3, 5, 7, 9, 11, 13]
+ 
+# Plot x-labels, y-label and data
+plt.plot([], [], color ='blue',
+         label ='Suspected')
+plt.plot([], [], color ='orange',
+         label ='Cured')
+plt.plot([], [], color ='brown',
+         label ='Deaths')
+ 
+# Implementing stackplot on data
+plt.stackplot(days, Suspected, Cured,
+              Deaths, baseline ='sym',
+              colors =['blue', 'orange',
+                       'brown'])
+ 
+plt.legend()
+ 
+plt.title('No of Cases')
+plt.xlabel('Day of the week')
+plt.ylabel('Overall cases')
+ 
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
