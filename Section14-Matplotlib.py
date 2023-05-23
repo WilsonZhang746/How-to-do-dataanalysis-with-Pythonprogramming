@@ -1477,14 +1477,136 @@ plt.show()
 
 
 
+### Lecture 15. Box plot
+
+# Import libraries
+import matplotlib.pyplot as plt
+import numpy as np
+ 
+# example a simple boxplot for 1000 random numbers with
+#normal distribution
+# Creating dataset
+np.random.seed(10)
+data = np.random.normal(50, 10,1000 )
+ 
+fig = plt.figure(figsize =(8, 6))
+ 
+# Creating plot
+plt.boxplot(data)
+ 
+# show plot
+plt.show()
+
+
+
+#Customizing Box Plot
+#The notch = True attribute creates the notch format to the box plot,
+#patch_artist = True fills the boxplot with colors, 
+#we can set different colors to different boxes.
+#The vert = 0 attribute creates horizontal box plot. 
+#labels takes same dimensions as the number data sets.
+
+# Example 2 plot 4 boxplots in one plot
+# Import libraries
+import matplotlib.pyplot as plt
+import numpy as np
+ 
+ 
+# Creating dataset
+np.random.seed(10)
+ 
+data_1 = np.random.normal(80, 5, 1000)
+data_2 = np.random.normal(70, 10, 1000)
+data_3 = np.random.normal(60, 15, 1000)
+data_4 = np.random.normal(50, 20, 1000)
+data = [data_1, data_2, data_3, data_4]
+ 
+fig = plt.figure(figsize =(10, 7))
+ 
+# Creating axes instance
+#denoting the lower left point of the new axes in figure coodinates
+# (0,0) and its width and height(1,1). 
+ax = fig.add_axes([0, 0, 1, 1])
+ 
+# Creating plot
+bp = ax.boxplot(data)
+ 
+# show plot
+plt.show()
 
 
 
 
 
 
+## example 3. customizing each box in plot
 
-
+# Import libraries
+import matplotlib.pyplot as plt
+import numpy as np
+ 
+# Creating dataset
+np.random.seed(10)
+data_1 = np.random.normal(100, 10, 200)
+data_2 = np.random.normal(90, 20, 200)
+data_3 = np.random.normal(80, 30, 200)
+data_4 = np.random.normal(70, 40, 200)
+data = [data_1, data_2, data_3, data_4]
+ 
+fig = plt.figure(figsize =(10, 7))
+ax = fig.add_subplot(111)
+ 
+# Creating axes instance
+bp = ax.boxplot(data, patch_artist = True,
+                notch ='True', vert = 0)
+ 
+colors = ['#0000FF', '#00FF00',
+          '#FFFF00', '#FF00FF']
+ 
+#zip will create a list of tuple of (box, color)
+#then set color for each box
+for patch, color in zip(bp['boxes'], colors):
+    patch.set_facecolor(color)
+ 
+# changing color and linewidth of
+# whiskers
+for whisker in bp['whiskers']:
+    whisker.set(color ='#8B008B',
+                linewidth = 1.5,
+                linestyle =":")
+ 
+# changing color and linewidth of caps
+# (boundary for outlier)
+for cap in bp['caps']:
+    cap.set(color ='#8B008B',
+            linewidth = 2)
+ 
+# changing color and linewidth of
+# medians
+for median in bp['medians']:
+    median.set(color ='red',
+               linewidth = 3)
+ 
+# changing style of fliers
+for flier in bp['fliers']:
+    flier.set(marker ='D',
+              color ='#e7298a',
+              alpha = 0.5)
+     
+# x-axis labels
+ax.set_yticklabels(['data_1', 'data_2',
+                    'data_3', 'data_4'])
+ 
+# Adding title
+plt.title("Customized box plot")
+ 
+# Removing top axes and right axes
+# ticks
+ax.get_xaxis().tick_bottom()
+ax.get_yaxis().tick_left()
+     
+# show plot
+plt.show()
 
 
 
