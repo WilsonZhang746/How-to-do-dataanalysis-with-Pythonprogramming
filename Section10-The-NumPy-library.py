@@ -479,6 +479,7 @@ c
 a[0] = 0
 c
 
+c=a.copy()
 
 
 ##Python lists
@@ -711,9 +712,6 @@ print(random.uniform(5, 10))
 
 
 
-
-
-
 ##Random Number Generation with NumPy’s random module
 #generate a 4 × 4 array of samples from the standard 
 #normal distribution using normal()
@@ -791,6 +789,9 @@ gfg
 
 
 # ## Lecture 9. Reading and Writing NumPy Array Data on Files
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)      #setting new working directory
 
 # ### Loading and Saving Data in Binary Files
 data = np.random.random(12)
@@ -847,6 +848,112 @@ print(data)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 10. Difference between reshape() and resize() method 
+# for Numpy ndarray
+
+# importing the module
+import numpy as np 
+    
+# creating an array 
+testarray = np.arange(0, 20) 
+print("Original array:")
+print(testarray)  
+  
+# using reshape()
+print("Changed array")
+print(testarray.reshape(4, 5)) 
+    
+print("Original array:")
+print(testarray)
+
+
+#Example 2: Using resize()
+
+# importing the module
+import numpy as np 
+    
+# creating an array 
+testarray = np.arange(0, 20) 
+print("Original array:")
+print(testarray)
+ 
+  
+# using resize()
+print("Changed array")
+# this will print nothing as None is returned
+testarray.resize(4, 5)
+print(testarray.resize(4, 5)) 
+    
+print("Original array:")
+print(testarray)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ## Linear Algebra with ndarray in Numpy
+
+#matrix multiplication using dot()
+import numpy as np
+x = np.array([[1., 2., 3.], [4., 5., 6.]])
+y = np.array([[6., 23.], [-1, 7], [8, 9]])
+x
+y
+x.dot(y)
+
+np.dot(x, y)
+
+
+np.dot(x, np.ones(3))
+
+
+#matrix multiplication using @
+x @ np.ones(3)
+
+
+#inverse matrix and matrix decomposition using numpy.linalg
+from numpy.linalg import inv, qr
+X = np.random.randn(5, 5)
+mat = X.T.dot(X)
+inv(mat)
+mat.dot(inv(mat))
+
+
+#Factor the matrix a as qr, where q is orthonormal and 
+#r is upper-triangular
+q, r = qr(mat)
+r
+q
 
 
 
