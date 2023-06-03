@@ -557,3 +557,64 @@ print("Operation on each item using lambda and map()",
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 11. partial() function
+from functools import partial
+
+#example 1
+  
+# A normal function
+def f(x1, x2, x3):
+    return x1*2 + x2**2  + x3/2
+  
+# A partial function that calls f with
+# x1 as 32, x2 as 22.
+g = partial(f, 32,22)
+  
+# Calling g()
+#Since we have pre-filled our function with some constant values
+# of x1, x2. And g() just takes a single argument i.e. the variable x3.
+print(g(20))
+
+
+
+#Example 2
+
+# A normal function
+def add(x1, x2, x3):
+    return 32 * x1 + 22 * x2 + x3
+  
+# A partial function with b = 1 and c = 2
+add_part = partial(add, x3 = 20, x2 = 22)
+  
+# Calling partial function
+#Since we have pre-filled our function with some constant values
+# of x3, x2. And add_part() just takes a single argument i.e. 
+#the variable x1.
+print(add_part(32))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
