@@ -457,6 +457,100 @@ sortedList
 
 
 
+### Example 9. Removing unwanted characters from string
+
+#Removing symbol from string using str.isalnum()
+
+#isalnum() method checks whether all the characters in a 
+#given string are alphanumeric or not
+
+string = "Wi;lson * an:d ! Mi;co1 * a*n:d ! Mi:ao2:"
+ 
+test_str = ''.join(letter for letter in string if letter.isalnum())
+print(test_str)
+
+
+#Removing symbol from string using replace() 
+#str.replace() inside a loop can check for a bad_char and 
+#then replace it with the empty string hence removing it. 
+
+# initializing bad_chars_list
+remove_chars = [';', ':', '!', "*", " "]
+ 
+# initializing test string
+test_string = "Wil;son * a:nd ! Mi;co * and*Mi:ao !"
+ 
+# printing original string
+print("Original String : " + test_string)
+ 
+# using replace() to
+# remove bad_chars
+for i in remove_chars:
+    test_string = test_string.replace(i, '')
+ 
+# printing resultant string
+print("Resultant list is : " + str(test_string))
+
+
+def remove_char(inputstring, badstring):
+    """Remove unwanted string from inputstring"""
+    for i in badstring:
+        inputstring = inputstring.replace(i, '')
+    return inputstring
+
+remove_char(test_string,remove_chars)
+
+
+#Removing symbol from string using join() + generator
+
+#By using Python join() we remake the string. 
+#In the generator function, we specify the logic to ignore 
+#the characters in bad_chars and hence construct a new 
+#string free from bad characters.
+
+# initializing bad_chars_list
+bad_chars = [';', ':', '!', "*", " "]
+ 
+# initializing test string
+test_string = "Wil;son * a:nd ! Mi;co * Mi*ao:miao !"
+ 
+# printing original string
+print("Original String : " + test_string)
+ 
+# using join() + generator to
+# remove bad_chars
+test_string = ''.join(i for i in test_string if not i in bad_chars)
+ 
+# printing resultant string
+print("Resultant list is : " + str(test_string))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

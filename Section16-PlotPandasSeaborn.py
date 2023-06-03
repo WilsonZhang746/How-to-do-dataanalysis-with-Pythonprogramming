@@ -99,6 +99,81 @@ plt.close('all')
 
 
 
+
+
+
+
+
+
+
+### Lecture 2. Swarm plot using Seaborn
+
+# Example 1: Basic visualization of “fmri” dataset using swarmplot() 
+
+import seaborn
+ 
+ 
+seaborn.set(style='whitegrid')
+fmri = seaborn.load_dataset("fmri")
+ 
+seaborn.swarmplot(x="timepoint",
+                  y="signal",
+                  data=fmri,
+                  palette="Set2",
+                  s=1.5)
+
+
+
+#Example 2: Grouping data points on the basis of category, 
+#here as region and event.
+
+import seaborn
+ 
+ 
+seaborn.set(style='whitegrid')
+fmri = seaborn.load_dataset("fmri")
+ 
+seaborn.swarmplot(x="timepoint",
+                  y="signal",
+                  hue="region",
+                  data=fmri,
+                  palette="Set2",
+                  s=5)
+
+
+
+#Example 3. students scores by gender and country
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)
+
+dataset = pd.read_csv("./University-Fullname-3column.csv")
+
+dataset.head()
+
+seaborn.swarmplot( x ='Gender', y= 'Math', hue='Country', data=dataset,
+         palette="Set2", dodge=True, s=10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Lecture 2. Seaborn plotting tutorial
 
 #Getting Started
