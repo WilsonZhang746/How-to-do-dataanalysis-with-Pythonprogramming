@@ -1624,5 +1624,186 @@ plt.show()
 
 
 
+### Lecture 16. Plot Subplots Within Other Subplots
+
+import matplotlib.pyplot as plt
+
+
+# ## Multi-Panel Plots
+
+# ### Display Subplots within Other Subplots
+
+
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = fig.add_axes([0.1,0.1,0.8,0.8])
+inner_ax = fig.add_axes([0.6,0.6,0.25,0.25])
+
+plt.show()
+
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig = plt.figure()
+ax = fig.add_axes([0.1,0.1,0.8,0.8])
+inner_ax = fig.add_axes([0.6,0.6,0.25,0.25])
+x1 = np.arange(10)
+y1 = np.array([1,2,7,1,5,2,4,2,3,1])
+x2 = np.arange(10)
+y2 = np.array([1,3,4,5,4,5,2,6,4,3])
+ax.plot(x1,y1)
+inner_ax.plot(x2,y2)
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 17. Drawing 2D Heatmap using Matplotlib in Python
+#Basic Heatmap Using Python Matplotlib Library 
+#Create a 10×10 Heatmap with Random data using Matplotlib
+
+# Program to plot 2-D Heat map
+# using matplotlib.pyplot.imshow() method
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+data = np.random.random(( 10 , 10 ))
+plt.imshow( data )
+ 
+plt.title( "2-D Heat Map" )
+plt.show()
+
+
+
+#Choosing Different Colormaps in Heatmap Using Matplotlib
+# using the cmap parameter
+
+# Program to plot 2-D Heat map
+# using matplotlib.pyplot.imshow() method
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+data = np.random.random((10, 10))
+plt.imshow(data, cmap='autumn')
+ 
+plt.title("Heatmap with different color")
+plt.show()
+
+
+#Adding Colorbar to Heatmap Using Matplotlib to show the 
+# weight of color relatively between a certain range.
+# using plt.colorbar().
+
+data = np.random.random((12, 12))
+plt.imshow(data, cmap='autumn', interpolation='nearest')
+ 
+# Add colorbar
+plt.colorbar()
+ 
+plt.title("Heatmap with color bar")
+plt.show()
+
+
+
+#Customized Heatmap 
+#use plt.annotate()  to annotate values in the heatmap
+
+import matplotlib.colors as colors
+ 
+# Generate random data
+data = np.random.randint(0, 100, size=(8, 8))
+ 
+# Create a custom color map
+# with blue and green colors
+colors_list = ['#0099ff', '#33cc33']
+cmap = colors.ListedColormap(colors_list)
+ 
+# Plot the heatmap with custom colors and annotations
+#vmin and vmax define the data range that the colormap covers. 
+#extent: The bounding box in data coordinates that the image will fill.
+plt.imshow(data, cmap=cmap, vmin=0, vmax=100, extent=[0, 8, 0, 8])
+for i in range(8):
+    for j in range(8):
+        plt.annotate(str(data[i][j]), xy=(j+0.5, i+0.5),
+                     ha='center', va='center', color='white')
+ 
+# Add colorbar
+cbar = plt.colorbar(ticks=[0, 50, 100])
+cbar.ax.set_yticklabels(['Low', 'Medium', 'High'])
+ 
+# Set plot title and axis labels
+plt.title("Customized heatmap with annotations")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+ 
+# Display the plot
+plt.show()
+
+
+
+
+# Heatmap Using Seaborn Library
+
+# importing the modules
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+   
+# generating 2-D 10x10 matrix of random numbers
+# from 1 to 100
+data = np.random.randint(low=1,
+                         high=100,
+                         size=(10, 10))
+   
+# plotting the heatmap
+hm = sns.heatmap(data=data,
+                annot=True)
+   
+# displaying the plotted heatmap
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
