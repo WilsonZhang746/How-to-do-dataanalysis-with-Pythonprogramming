@@ -171,6 +171,83 @@ seaborn.swarmplot( x ='Gender', y= 'Math', hue='Country', data=dataset,
 
 
 
+### Lecture 3. Joint plot using Seaborn
+
+#seaborn.jointplot(x,  y,  data, stat_func)
+
+#example 1, a basic Joint plot
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+import numpy as np
+import pandas as pd
+#setting working directory
+import os
+work_path="d:\\PythonBeginningCourse"
+os.chdir(work_path)
+
+dataset = pd.read_csv("./University-Fullname-full.csv")
+
+dataset.head()
+
+list(dataset.columns)
+
+
+sns.jointplot(x = "Math", y = "Physics",
+               data = dataset)
+# show the plot
+plt.show()
+
+
+#example 2. add hue for grouping
+sns.jointplot(x = "Math", y = "Physics",
+               data = dataset, hue='Gender')
+# show the plot
+plt.show()
+
+
+#example 3: add regression line
+sns.jointplot(x = "Math", y = "Physics",
+               data = dataset, kind='reg')
+# show the plot
+plt.show()
+
+  
+
+
+## example 4. Add hex kind
+sns.jointplot(x = "Math", y = "Physics",
+               data = dataset, kind='hex')
+# show the plot
+plt.show()
+
+
+
+## example 5. Add kde kind
+sns.jointplot(x = "Math", y = "Physics",
+               data = dataset, kind='kde')
+# show the plot
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
