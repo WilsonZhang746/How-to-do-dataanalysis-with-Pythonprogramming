@@ -32,6 +32,14 @@ print(message)
 
 
 
+
+
+
+
+
+
+
+
 ##Lecture 2. Changing, Appending,Removing items of Lists
 #Changing elements of a list
 motorcycles = ['honda', 'yamaha', 'suzuki', 'ducati'] 
@@ -103,6 +111,16 @@ print("\nA " + too_expensive.title() + " is too expensive for me.")
 
 
 
+
+
+
+
+
+
+
+
+
+
 ##Lecture 3. Organizing lists
 #Sorting a List Permanently with the sort() Method
 cars = ['bmw', 'audi', 'toyota', 'subaru']
@@ -143,6 +161,12 @@ len(cars)
 
 
 
+
+
+
+
+
+
 ##Lecture 4. Looping Through a List
 #Looping Through an Entire List
 magicians = ['alice', 'david', 'carolina']
@@ -157,6 +181,10 @@ for magician in magicians:
     print("I can't wait to see your next trick, " + magician.title() + ".\n")     
     
 print("Thank you everyone, that was a great magic show!")
+
+
+
+
 
 
 
@@ -190,6 +218,14 @@ squares = []
 for value in range(1,11):
     squares.append(value**2)
 print(squares)
+
+
+
+
+
+
+
+
 
 
 
@@ -246,6 +282,17 @@ print("\nMy friend's favorite foods are:")
 print(friend_foods)
 
 
+
+
+
+
+
+
+
+
+
+
+
 ##Lecture 7. tuples
 dimensions = (200, 50)
 print(dimensions[0])
@@ -253,7 +300,7 @@ print(dimensions[1])
 
 #change one of the items in the tuple
 dimensions = (200, 50)
-dimensions[0] = 250
+dimensions[0] = 250     #will get error
 
 #looping over all values in a tuple
 dimensions = (200, 50)
@@ -270,6 +317,171 @@ for dimension in dimensions:
 
 
 
+
+
+
+
+
+
+
+
+
+
+##Lecture 8 Using a while Loop with Lists
+#Moving Items from One List to Another
+# Start out with some users that need to be verified,
+#  and an empty list to hold confirmed users.
+unconfirmed_users = ['alice', 'brian', 'candace']
+confirmed_users = []
+
+# Verify each user, until there are no more unconfirmed users.
+#  Move each verified user into the list of confirmed users.
+while unconfirmed_users:
+    current_user = unconfirmed_users.pop()
+    
+    print("Verifying user: " + current_user.title())
+    confirmed_users.append(current_user)
+    
+# Display all confirmed users.
+print("\nThe following users have been confirmed:")
+for confirmed_user in confirmed_users:
+    print(confirmed_user.title())
+    
+    
+    
+#Removing All Instances of Specific Values from a List
+pets = ['dog', 'cat', 'dog', 'goldfish', 'cat', 'rabbit', 'cat']
+print(pets)
+
+while 'cat' in pets:
+    pets.remove('cat')
+    
+print(pets)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 9. Set operation
+
+
+## Create a set
+
+empty_set = set()
+
+empty_set
+
+even_numbers = {0, 2, 4, 6, 8}
+even_numbers
+
+odd_numbers = {1, 3, 5, 7, 9}
+odd_numbers
+
+
+##Convert from Other Data Types with set()
+
+#from a string
+set( 'letters' )
+
+#from a list
+set( ['Dasher', 'Dancer', 'Prancer', 'Mason-Dixon'] ) 
+
+#from a tuple
+set( ('Ummagumma', 'Echoes', 'Atom Heart Mother') )
+
+#from a dictionary
+set( {'apple': 'red', 'orange': 'orange', 'cherry': 'red'} )
+
+
+a = {1, 2}
+b = {2, 3}
+
+#set intersection
+a & b
+a.intersection(b)
+
+
+#set union
+a | b
+a.union(b)
+
+
+drinks = {
+    'martini': {'vodka', 'vermouth'},
+    'black russian': {'vodka', 'kahlua'},
+    'white russian': {'cream', 'kahlua', 'vodka'},
+    'manhattan': {'rye', 'vermouth', 'bitters'},
+    'screwdriver': {'orange juice', 'vodka'}
+    }
+
+bruss = drinks['black russian']
+wruss = drinks['white russian']
+
+#set difference
+a - b
+a.difference(b)
+
+bruss - wruss
+
+wruss - bruss
+
+
+#The exclusive or (items in one set or the other, but not both)
+# uses ^ or symmetric_difference():
+a ^ b
+
+a.symmetric_difference(b)
+
+
+## Test for Value by Using in
+
+#making a dictionary, with value parts are sets
+
+drinks = {
+    'martini': {'vodka', 'vermouth'},
+    'black russian': {'vodka', 'kahlua'},
+    'white russian': {'cream', 'kahlua', 'vodka'},
+    'manhattan': {'rye', 'vermouth', 'bitters'},
+    'screwdriver': {'orange juice', 'vodka'}
+    }
+
+#loop through dicionary value part
+for name, contents in drinks.items():
+    if 'vodka' in contents:
+        print(name)
+
+
+for name, contents in drinks.items():
+    if 'vodka' in contents and not ('vermouth' in contents or
+    'cream' in contents):
+        print(name)
+
+
+# check for combinations of set values
+
+for name, contents in drinks.items():
+    if contents & {'vermouth', 'orange juice'}:
+        print(name)
+
+
+#we wanted vodka but neither cream nor vermouth:
+    
+for name, contents in drinks.items():
+    if 'vodka' in contents and not contents & {'vermouth', 'cream'}:
+        print(name)
 
 
 
