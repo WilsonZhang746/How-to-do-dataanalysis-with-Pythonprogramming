@@ -65,6 +65,16 @@ print(alien_0)
 
 
 
+
+
+
+
+
+
+
+
+
+
 #Lecture 2. Looping Through a Dictionary
 #Looping Through All Key-Value Pairs
 user_0 = {'username': 'efermi',
@@ -95,6 +105,7 @@ favorite_languages = {
     'edward': 'ruby',
     'phil': 'python',
     }
+ 
 for name in favorite_languages.keys():
     print(name.title())
 
@@ -146,6 +157,18 @@ favorite_languages = {
 print("The following languages have been mentioned:")
 for language in favorite_languages.values():
     print(language.title())
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -231,6 +254,126 @@ for username, user_info in users.items():
 
         
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 4. get() method
+
+d = {'Wilson': 32, 'Dudu': 20, 'Maomao': 22}
+print(d.get('Wilson'))
+
+
+#Python get() Method with default parameter.
+
+d = {'Wilson': 32, 'Dudu': 20, 'Maomao': 22}
+# since 4 is not in keys, it'll print "Not found"
+print(d.get('Mia', "Not found"))
+
+
+
+## using nested get()
+
+test_dict = {'Wilson': {'Age': 32, 'Gender': 'male'},  'Dudu': {'Age': 20, 'Gender': 'male'}, 'Maomao': {'Age': 22, 'Gender': 'male'}}
+
+res = test_dict.get('Wilson', {}).get('Age')
+
+res
+
+
+### Sort a list of dictionaries
+
+dicts_lists = [
+  {
+    "Name": "Wilson",
+    "Age": 32,
+  },
+  {
+     "Name": "Dudu",
+     "Age": 20,
+  },
+  {
+    "Name": "Maomao",
+    "Age": 22,
+  }
+]
+
+
+#using dictionary's get method to sort by Age
+dicts_lists.sort(key=lambda item: item.get("Age"))
+
+dicts_lists
+
+
+
+
+#Difference Between Python Dictionary get() method and dict[key]
+# Using get() to get the value as a None
+course={'language': 'python', 'fee': 4000}
+print('duration:', course.get('duration'))
+
+
+
+# Use dict[key], key is not in the dictionary
+course={'language': 'python', 'fee': 4000}
+print('duration:',course['duration'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##Lecture 4. Using a while Loop with Dictionaries
+#Filling a Dictionary with User Input
+responses = {}
+
+# Set a flag to indicate that polling is active.
+polling_active = True
+
+while polling_active:
+    # Prompt for the person's name and response.
+    name = input("\nWhat is your name? ")
+    response = input("Which mountain would you like to climb someday? ")
+    
+    # Store the response in the dictionary:
+    responses[name] = response
+    
+    # Find out if anyone else is going to take the poll.
+    repeat = input("Would you like to let another person respond? (yes/ no) ")
+    if repeat == 'no':
+        polling_active = False
+        
+# Polling is complete. Show the results.
+print("\n--- Poll Results ---")
+for name, response in responses.items():
+    print(name + " would like to climb " + response + ".")
+    
+
+
+
+
+
+
+
 
 
 
