@@ -3,7 +3,7 @@
 Created on Tue Dec 13 12:45:46 2022
 How to do data analysis with Python programming
 
-@author: https://www.youtube.com/@easydatascience2508
+@author: https://www.youtube.com/@python32
 """
 
 ##Section 7. Functions
@@ -23,6 +23,8 @@ def greet_user(username):
     print("Hello, " + username.title() + "!")
     
 greet_user('jesse')
+
+greet_user('Wilson')
 
 
 
@@ -514,7 +516,7 @@ print(calc(19))
 
 
 
-# Invoking lambda return value to perform various operations
+# Invoking lambda return value to perform various string operations
 concate = lambda s: ''.join([char for char in s if not char.isdigit()])
 print("filter_nums():", concate("Wilson32"))
  
@@ -526,6 +528,20 @@ print("find_sum():", find_sum(301301))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Lecture 11. Lambda and Map, Filter
 
 #The lambda function gets more helpful when used inside a function.
 #We can use lambda function inside map(), filter(), sorted() 
@@ -570,7 +586,7 @@ print("Operation on each item using lambda and map()",
 
 
 
-### Lecture 11. partial() function
+### Lecture 12. partial() function
 from functools import partial
 
 #example 1
