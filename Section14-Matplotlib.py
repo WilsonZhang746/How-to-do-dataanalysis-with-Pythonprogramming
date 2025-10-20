@@ -1788,7 +1788,15 @@ plt.show()
 
 
 
+### Heatmap
+import numpy as np
+import matplotlib.pyplot  as plt
 
+my_map = np.random.randn(10, 10)
+
+plt.imshow(my_map)
+plt.colorbar()
+plt.show()
 
 
 
