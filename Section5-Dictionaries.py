@@ -264,10 +264,45 @@ for username, user_info in users.items():
 
 
 
+##Lecture 4. Using a while Loop with Dictionaries
+#Filling a Dictionary with User Input
+responses = {}
+
+# Set a flag to indicate that polling is active.
+polling_active = True
+
+while polling_active:
+    # Prompt for the person's name and response.
+    name = input("\nWhat is your name? ")
+    response = input("Which mountain would you like to climb someday? ")
+    
+    # Store the response in the dictionary:
+    responses[name] = response
+    
+    # Find out if anyone else is going to take the poll.
+    repeat = input("Would you like to let another person respond? (yes/ no) ")
+    if repeat == 'no':
+        polling_active = False
+        
+# Polling is complete. Show the results.
+print("\n--- Poll Results ---")
+for name, response in responses.items():
+    print(name + " would like to climb " + response + ".")
+    
 
 
 
-### Lecture 4. get() method
+
+
+
+
+
+
+
+
+
+
+### Lecture 5. get() method
 
 d = {'Wilson': 32, 'Dudu': 20, 'Maomao': 22}
 print(d.get('Wilson'))
@@ -335,53 +370,45 @@ print('duration:',course['duration'])
 
 
 
+### Dictionary Comprehensions	
+#simplest form
+
+#{ key_expression : value_expression for expression in iterable }
+
+# Creating a dictionary of squares:
+numbers = [1, 2, 3, 4, 5]
+squares_dict = {num: num**2 for num in numbers}
+print(squares_dict)
 
 
 
+#We are running a loop over each of the seven letters in 
+#the string 'letters' and counting how many times that letter appears.
+word = 'letters'
+letter_counts = {letter: word.count(letter) for letter in word}
+
+letter_counts
+
+
+#to avoid counting twice
+word = 'letters'
+letter_counts = {letter: word.count(letter) for letter in set(word)}
+letter_counts
 
 
 
-
-##Lecture 4. Using a while Loop with Dictionaries
-#Filling a Dictionary with User Input
-responses = {}
-
-# Set a flag to indicate that polling is active.
-polling_active = True
-
-while polling_active:
-    # Prompt for the person's name and response.
-    name = input("\nWhat is your name? ")
-    response = input("Which mountain would you like to climb someday? ")
+#Filtering elements during dictionary creation:
     
-    # Store the response in the dictionary:
-    responses[name] = response
-    
-    # Find out if anyone else is going to take the poll.
-    repeat = input("Would you like to let another person respond? (yes/ no) ")
-    if repeat == 'no':
-        polling_active = False
-        
-# Polling is complete. Show the results.
-print("\n--- Poll Results ---")
-for name, response in responses.items():
-    print(name + " would like to climb " + response + ".")
-    
+words = ["apple", "banana", "cherry", "date"]
+long_words_dict = {word: len(word) for word in words if len(word) > 5}
+print(long_words_dict)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+#Transforming existing dictionary items:
+original_dict = {"apple": 1, "banana": 2, "cherry": 3}
+transformed_dict = {key.upper(): value * 10 for key, value in original_dict.items()}
+print(transformed_dict)    
 
 
 
