@@ -597,3 +597,18 @@ for row, col in cells:
 
 
 
+
+
+
+
+
+### Set Comprehensions
+a_set = {number for number in range(1,6) if number % 3 == 1}
+a_set
+
+b_set = {number for number in [1,2,3,4,5,7,8,4,2,3,6,5,8,12,15,14,17] if number % 3 == 2}
+b_set
+
+
+
+
