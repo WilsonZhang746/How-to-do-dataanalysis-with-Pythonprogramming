@@ -3,7 +3,7 @@
 Created on Tue Dec 13 12:45:46 2022
 How to do data analysis with Python programming
 
-@author: https://www.youtube.com/@python32
+@author: https://www.youtube.com/@easydatascience2508
 """
 
 ##Section 7. Functions
@@ -23,8 +23,6 @@ def greet_user(username):
     print("Hello, " + username.title() + "!")
     
 greet_user('jesse')
-
-greet_user('Wilson')
 
 
 
@@ -516,7 +514,7 @@ print(calc(19))
 
 
 
-# Invoking lambda return value to perform various string operations
+# Invoking lambda return value to perform various operations
 concate = lambda s: ''.join([char for char in s if not char.isdigit()])
 print("filter_nums():", concate("Wilson32"))
  
@@ -528,20 +526,6 @@ print("find_sum():", find_sum(301301))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-### Lecture 11. Lambda and Map, Filter
 
 #The lambda function gets more helpful when used inside a function.
 #We can use lambda function inside map(), filter(), sorted() 
@@ -586,7 +570,7 @@ print("Operation on each item using lambda and map()",
 
 
 
-### Lecture 12. partial() function
+### Lecture 11. partial() function
 from functools import partial
 
 #example 1
@@ -620,6 +604,43 @@ add_part = partial(add, x3 = 20, x2 = 22)
 # of x3, x2. And add_part() just takes a single argument i.e. 
 #the variable x1.
 print(add_part(32))
+
+
+
+
+
+
+
+
+
+
+### Gather Positional Arguments with *
+
+#When used inside the function with a parameter, an asterisk 
+#groups a variable number of positional arguments into a 
+#tuple of parameter values
+
+def print_args(*args):
+    print('Positional argument tuple:', args)
+
+#If you call it with no arguments, you get nothing in *args:
+print_args()
+
+
+#Whatever you give it will be printed as the args tuple:
+print_args(3, 2, 1, 'wait!', 'uh...')
+
+
+#If your function has required positional arguments as well, 
+#*args goes at the end and grabs all the rest:
+def print_more(required1, required2, *args):
+    print('Need this one:', required1)
+    print('Need this one too:', required2)
+    print('All the rest:', args)
+    
+    
+print_more('cap', 'gloves', 'scarf', 'monocle', 'mustache wax')
+
 
 
 
