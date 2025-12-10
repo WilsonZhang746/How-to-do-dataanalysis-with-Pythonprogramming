@@ -414,3 +414,55 @@ print(transformed_dict)
 
 
 
+
+
+
+
+
+
+
+### Gather Keyword Arguments with **		
+#You can use two asterisks (**) to group keyword arguments 
+#into a dictionary, where the argument names are the keys, 
+#and their values are the corresponding dictionary values.
+
+#The following example defines the function print_kwargs() 
+#to print its keyword arguments:
+def print_kwargs(**kwargs):
+    print('Keyword arguments:', kwargs)
+
+print_kwargs(wine='merlot', entree='mutton', dessert='macaroon')
+
+
+#The **kwargs syntax in Python allows a function to accept an 
+#arbitrary number of keyword arguments. These arguments are 
+#collected into a dictionary within the function, where the 
+#keys are the argument names and the values are the 
+#corresponding argument values.
+#Here is an example demonstrating the use of **kwargs:
+    
+def print_user_details(**kwargs):
+    """
+    Prints user details passed as keyword arguments.
+    """
+    print("User Details:")
+    for key, value in kwargs.items():
+        print(f"{key.replace('_', ' ').title()}: {value}")
+
+# Calling the function with various keyword arguments
+print_user_details(name="Alice", age=30, city="New York")
+
+print("\n---")
+
+print_user_details(first_name="Bob", last_name="Smith", email="bob.smith@example.com", occupation="Engineer")
+
+
+
+
+
+
+
+
+
+
+
