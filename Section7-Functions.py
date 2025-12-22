@@ -650,6 +650,40 @@ print_more('cap', 'gloves', 'scarf', 'monocle', 'mustache wax')
 
 
 
+### Inner Functions
+#You can define a function within another function:
+    
+def outer(a, b):
+    def inner(c, d):
+        return c + d
+    return inner(a, b)    
+
+outer(4, 7)
+
+#For a string example, this inner function adds some 
+#text to its argument:
+    
+def knights(saying):
+    def inner(quote):
+        return "We are the knights who say: '%s'" % quote
+    return inner(saying)
+
+knights('Ni!')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
