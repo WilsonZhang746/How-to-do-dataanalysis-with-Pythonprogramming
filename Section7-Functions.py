@@ -680,6 +680,49 @@ knights('Ni!')
 
 
 
+###Closures
+
+# inner2() uses the outer saying parameter directly instead 
+#of getting it as an argument.
+# knights2() returns the inner2 function name instead of 
+#calling it.
+
+
+def knights2(saying):
+    def inner2():
+        return "We are the knights who say: '%s'" % saying
+    return inner2
+
+#Let’s call knights2() twice, with different arguments:
+a = knights2('Duck')
+b = knights2('Hasenpfeffer')
+
+
+#They’re functions, but they’re also closures:
+a
+
+b
+
+#If we call them, they remember the saying that was used 
+#when they were created by knights2:
+a()    
+
+
+b()
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
