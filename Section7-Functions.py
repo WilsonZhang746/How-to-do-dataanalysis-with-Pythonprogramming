@@ -715,6 +715,109 @@ b()
 
 
 
+###Generators
+
+def my_range(first=0, last=10, step=1):
+    number = first
+    while number < last:
+        yield number
+        number += step
+
+my_range
+
+ranger = my_range(1, 5)
+
+for x in ranger:
+    print(x)
+
+
+
+
+
+
+
+
+
+###Using Decorators
+#The function document_it() defines a decorator that will 
+#do the following:
+#• Print the function’s name and the values of its arguments
+#• Run the function with the arguments
+#• Print the result
+#• Return the modified function for use
+
+def document_it(func):
+    def new_function(*args, **kwargs):
+        print('Running function:', func.__name__)
+        print('Positional arguments:', args)
+        print('Keyword arguments:', kwargs)
+        result = func(*args, **kwargs)
+        print('Result:', result)
+        return result
+    return new_function
+
+#define another function 
+def add_ints(a, b):
+    return a + b
+
+add_ints(3, 5)
+
+#You can apply the decorator manually
+# manual decorator assignment
+cooler_add_ints = document_it(add_ints) 
+cooler_add_ints(3, 5)
+
+
+#As an alternative to the manual decorator assignment above, 
+# just add @decorator_name before the function that 
+#you want to decorate:
+
+@document_it
+def add_ints(a, b):
+    return a + b
+
+add_ints(3, 5)
+
+
+#You can have more than one decorator for a function. 
+#Let’s write another decorator called square_it() 
+#that squares the result:
+    
+def square_it(func):
+    def new_function(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result * result
+    return new_function
+
+
+#The decorator that’s used closest to the function 
+#runs first and then the one above it.
+
+@document_it
+@square_it
+def add_ints(a, b):
+    return a + b
+
+    
+add_ints(3, 5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
