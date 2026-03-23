@@ -815,6 +815,93 @@ add_ints(3, 5)
 
 
 
+### Namespaces and Scope
+animal = 'fruitbat'
+def print_global():
+   print('inside print_global:', animal)
+
+#You can get the value of a global variable from within 
+#a function:
+
+print('at the top level:', animal)
+
+print_global()
+
+#But, if you try to get the value of the global variable 
+#and change it within the function,you get an error:
+#UnboundLocalError: local variable 'animal' referenced 
+#before assignment
+
+def change_and_print_global():
+    print('inside change_and_print_global:', animal)
+    animal = 'wombat'
+    print('after the change:', animal)
+   
+change_and_print_global()
+
+
+#If you just change it, it changes a different variable 
+#also named animal, but this variable is inside the function:
+    
+def change_local():
+    animal = 'wombat'
+    print('inside change_local:', animal, id(animal))
+
+change_local()
+
+animal
+
+id(animal)
+
+#To access the global variable rather than the local one 
+#within a function, you need to be explicit and use the 
+#global keyword
+
+animal = 'fruitbat'
+def change_and_print_global():
+    global animal
+    animal = 'wombat'
+    print('inside change_and_print_global:', animal)
+    
+animal
+
+change_and_print_global()
+
+#Python provides two functions to access the contents 
+#of your namespaces:
+#locals() returns a dictionary of the contents of the
+# local namespace.
+#globals() returns a dictionary of the contents of the 
+#global namespace.
+
+
+animal = 'fruitbat'
+def change_local():
+    animal = 'wombat' # local variable
+    print('locals:', locals())
+
+
+#The local namespace within change_local() contained only 
+#the local variable animal.
+animal
+
+change_local()
+
+#The global namespace contained the separate global variable 
+#animal and a number of other things.
+print('globals:', globals())
+
+
+animal
+
+
+
+
+
+
+
+
+
 
 
 
