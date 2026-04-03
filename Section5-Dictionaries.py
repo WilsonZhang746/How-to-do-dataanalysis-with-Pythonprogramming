@@ -422,6 +422,7 @@ print(transformed_dict)
 
 
 ### Gather Keyword Arguments with **		
+
 #You can use two asterisks (**) to group keyword arguments 
 #into a dictionary, where the argument names are the keys, 
 #and their values are the corresponding dictionary values.
@@ -455,6 +456,176 @@ print_user_details(name="Alice", age=30, city="New York")
 print("\n---")
 
 print_user_details(first_name="Bob", last_name="Smith", email="bob.smith@example.com", occupation="Engineer")
+
+
+
+
+
+
+
+
+
+### Handle Missing Keys with setdefault() and defaultdict()
+
+#Using the dictionary get() function to return a default 
+#value avoids an exception. 
+#The setdefault() function is like get(), but also assigns 
+#an item to the dictionary if the key is missing:
+    
+periodic_table = {'Hydrogen': 1, 'Helium': 2}
+print(periodic_table)   
+
+
+#If the key was not already in the dictionary, 
+#the new value is used:
+carbon = periodic_table.setdefault('Carbon', 12)
+carbon 
+
+periodic_table
+
+#If we try to assign a different default value to an 
+#existing key, the original value is returned
+#and nothing is changed:
+    
+    
+helium = periodic_table.setdefault('Helium', 947)
+helium
+    
+    
+periodic_table
+
+#defaultdict() is similar, but specifies the default 
+#value for any new key up front, when
+#the dictionary is created.
+#we can pass the function int, which will be called as 
+#int() and return the integer 0:
+    
+from collections import defaultdict
+periodic_table = defaultdict(int)
+
+#Now, any missing value will be an integer (int), 
+#with the value 0:
+    
+periodic_table['Hydrogen'] = 1
+periodic_table['Lead']
+
+periodic_table
+
+#In the following example, no_idea() is a function,  executed 
+#to return a value when needed:
+    
+
+from collections import defaultdict
+
+def no_idea():
+    return 'Huh?'
+
+bestiary = defaultdict(no_idea)
+bestiary['A'] = 'Abominable Snowman'
+bestiary['B'] = 'Basilisk'
+bestiary['A']
+bestiary['B']
+
+bestiary['C']
+
+
+#By the way, you can use lambda to define your default-
+#making function right inside the call:
+bestiary = defaultdict(lambda: 'Huh?')
+
+bestiary['E']
+
+#Using int is one way to make your own counter:
+
+from collections import defaultdict
+food_counter = defaultdict(int)
+for food in ['spam', 'spam', 'eggs', 'spam']:
+    food_counter[food] += 1
+
+for food, count in food_counter.items():
+    print(food, count)
+    
+
+#if food_counter had been a normal dictionary instead of a
+#defaultdict, Python would have raised an exception every
+# time we tried to increment the dictionary element 
+#food_counter[food] because it would not have been initialized.
+#We would have needed to do some extra work, as shown here:
+
+dict_counter = {}
+for food in ['spam', 'spam', 'eggs', 'spam']:
+    if not food in dict_counter:
+        dict_counter[food] = 0
+    dict_counter[food] += 1
+
+for food, count in dict_counter.items():
+    print(food, count)
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Count Items with Counter()
+
+from collections import Counter
+breakfast = ['spam', 'spam', 'eggs', 'spam']
+breakfast_counter = Counter(breakfast)
+breakfast_counter
+
+#The most_common() function returns all elements in 
+#descending order
+
+breakfast_counter.most_common()
+
+breakfast_counter.most_common(1)
+
+
+#You can combine counters
+
+breakfast_counter
+
+
+#we’ll make a new list called lunch, and a counter 
+#called lunch_counter
+
+
+lunch = ['eggs', 'eggs', 'bacon']
+lunch_counter = Counter(lunch)
+lunch_counter
+
+#we combine the two counters is by addition, using +:
+    
+breakfast_counter + lunch_counter
+
+
+#you subtract one counter from another by using -.
+
+breakfast_counter - lunch_counter
+
+
+lunch_counter - breakfast_counter
+
+#common items by using the intersection operator &:
+
+breakfast_counter & lunch_counter
+
+#you can get all items by using the union operator |:
+    
+breakfast_counter | lunch_counter
+
+
+
+
+
+
 
 
 
