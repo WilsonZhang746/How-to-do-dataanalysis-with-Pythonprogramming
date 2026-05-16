@@ -900,10 +900,37 @@ animal
 
 
 
+###  Iterate over Code Structures with itertools
+
+#chain() runs through its arguments as though they 
+#were a single iterable:
+
+import itertools
+for item in itertools.chain([1, 2], ['a', 'b']):
+    print(item)
 
 
 
+#cycle() is an infinite iterator, cycling through its arguments:
+for item in itertools.cycle([1, 2]):
+    print(item)
 
+
+#accumulate() calculates accumulated values. 
+#By default, it calculates the sum:
+
+for item in itertools.accumulate([1, 2, 3, 4]):
+    print(item)
+
+
+#You can provide a function as the second argument to 
+#accumulate(), and it will be used instead of addition.
+#This example calculates an accumulated product:
+def multiply(a, b):
+    return a * b    
+    
+for item in itertools.accumulate([1, 2, 3, 4], multiply):
+    print(item)
 
 
 
